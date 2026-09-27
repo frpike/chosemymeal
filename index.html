@@ -1,0 +1,720 @@
+<title>Choose My Meal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --bg: #EEF2EA;
+    --surface: #FFFFFF;
+    --surface-2: #F6F8F3;
+    --ink: #1B2A1F;
+    --muted: #5A685C;
+    --line: #D3DBCC;
+    --leek: #2E6A3E;
+    --leek-ink: #FFFFFF;
+    --leek-soft: #DCEBD7;
+    --bean: #F1E3AE;
+    --bean-ink: #5B4A12;
+    --chorizo: #B23F28;
+    --chorizo-soft: #F7DED6;
+    --focus: #2E6A3E;
+    --shadow: 0 1px 2px rgba(27, 42, 31, .06), 0 6px 20px rgba(27, 42, 31, .06);
+    --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #111812;
+      --surface: #1A231C;
+      --surface-2: #151D17;
+      --ink: #E6EDE3;
+      --muted: #9AA99C;
+      --line: #2D3B30;
+      --leek: #86C793;
+      --leek-ink: #0F1A12;
+      --leek-soft: #213829;
+      --bean: #3A3319;
+      --bean-ink: #EBD88E;
+      --chorizo: #EE8A6E;
+      --chorizo-soft: #3A221C;
+      --focus: #86C793;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.25);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #111812;
+    --surface: #1A231C;
+    --surface-2: #151D17;
+    --ink: #E6EDE3;
+    --muted: #9AA99C;
+    --line: #2D3B30;
+    --leek: #86C793;
+    --leek-ink: #0F1A12;
+    --leek-soft: #213829;
+    --bean: #3A3319;
+    --bean-ink: #EBD88E;
+    --chorizo: #EE8A6E;
+    --chorizo-soft: #3A221C;
+    --focus: #86C793;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.25);
+  }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.5 var(--body);
+    padding-inline: 16px;
+    padding-block: 20px 48px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; display: grid; gap: 20px; }
+  h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; line-height: 1.1; }
+  a { color: var(--leek); }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+  /* Header */
+  header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 16px; }
+  .brand h1 { font-size: clamp(2rem, 7vw, 2.9rem); font-weight: 800; letter-spacing: -.02em; }
+  .brand h1 span { color: var(--leek); }
+  .brand p { margin: 4px 0 0; color: var(--muted); }
+
+  /* Buttons */
+  .btn {
+    border: 0; border-radius: 999px; padding: 12px 20px; cursor: pointer;
+    font-weight: 700; display: inline-flex; align-items: center; gap: 8px; justify-content: center;
+    text-decoration: none; transition: transform .12s ease, background .12s ease;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn-primary { background: var(--leek); color: var(--leek-ink); }
+  .btn-bean { background: var(--bean); color: var(--bean-ink); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+  .btn-ghost:hover { border-color: var(--leek); }
+  .btn[disabled] { opacity: .55; cursor: default; }
+  .btn-wide { width: 100%; padding: 15px 20px; font-size: 1.05rem; }
+
+  /* Steps */
+  .steps { background: var(--surface); border-radius: 22px; box-shadow: var(--shadow); padding: 8px 20px; }
+  .step { display: grid; grid-template-columns: 34px 1fr; gap: 4px 12px; padding-block: 16px; border-bottom: 1px solid var(--line); }
+  .step:last-of-type { border-bottom: 0; }
+  .step-num {
+    width: 30px; height: 30px; border-radius: 50%; background: var(--leek-soft); color: var(--leek);
+    font: 700 .95rem/30px var(--display); text-align: center; margin-top: 1px;
+  }
+  .step h2 { font-size: 1.15rem; font-weight: 700; padding-top: 4px; }
+  .step-body { grid-column: 2; display: grid; gap: 10px; }
+  .hint { color: var(--muted); font-size: .9rem; margin: 0; }
+  .clock { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ink); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; border: 0; padding: 0; margin: 0; min-width: 0; }
+  .chips legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .chip { position: relative; }
+  .chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .chip span {
+    display: inline-flex; flex-direction: column; padding: 8px 14px; border-radius: 14px;
+    border: 1.5px solid var(--line); background: var(--surface-2); cursor: pointer; font-weight: 600; font-size: .95rem;
+    transition: background .12s ease, border-color .12s ease;
+  }
+  .chip small { font-weight: 500; color: var(--muted); font-size: .8rem; }
+  .chip input:checked + span { background: var(--leek); border-color: var(--leek); color: var(--leek-ink); }
+  .chip input:checked + span small { color: inherit; opacity: .85; }
+  .chip input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .chip-lg span { padding: 10px 16px; }
+
+  /* Results */
+  .section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .section-head h2 { font-size: 1.6rem; font-weight: 800; }
+  .summary { color: var(--muted); font-size: .92rem; margin: 4px 0 0; }
+  .note { background: var(--bean); color: var(--bean-ink); border-radius: 12px; padding: 10px 14px; font-size: .92rem; margin: 0; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+  .card {
+    background: var(--surface); border-radius: 20px; box-shadow: var(--shadow); padding: 18px;
+    display: flex; flex-direction: column; gap: 12px; border-top: 6px solid var(--leek);
+  }
+  .card.pick-b { border-top-color: var(--bean-ink); }
+  .eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .card h3 { font-size: 1.3rem; font-weight: 700; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: .8rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--leek-soft); color: var(--leek); font-variant-numeric: tabular-nums; }
+  .tag.warn { background: var(--chorizo-soft); color: var(--chorizo); }
+  .tag.love { background: var(--bean); color: var(--bean-ink); }
+  .ing-label { font-size: .8rem; font-weight: 700; color: var(--muted); margin: 0 0 4px; }
+  .ing { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 4px 6px; font-size: .92rem; }
+  .ing li::after { content: " ·"; color: var(--muted); }
+  .ing li:last-child::after { content: ""; }
+  .card-note { margin: 0; font-size: .9rem; color: var(--muted); }
+  .card-actions { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; }
+  .card-actions .btn { padding: 10px 16px; font-size: .95rem; }
+  .links { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: .92rem; font-weight: 600; }
+
+  .row-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  /* Neither panel */
+  .panel { background: var(--surface); border-radius: 22px; box-shadow: var(--shadow); padding: 20px; display: grid; gap: 12px; }
+  .panel h2 { font-size: 1.3rem; font-weight: 800; }
+  textarea, input[type="text"], input[type="url"], input[type="number"], select {
+    width: 100%; border: 1.5px solid var(--line); border-radius: 14px; background: var(--surface-2);
+    padding: 12px 14px; font-size: 1rem;
+  }
+  textarea { min-height: 88px; resize: vertical; }
+  .status { color: var(--muted); font-size: .92rem; margin: 0; min-height: 1.4em; }
+  .method { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: .95rem; }
+
+  /* Add recipe */
+  details.panel > summary { cursor: pointer; font: 800 1.3rem/1.2 var(--display); list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  details.panel > summary::-webkit-details-marker { display: none; }
+  details.panel > summary::after { content: "+"; font-size: 1.6rem; color: var(--leek); }
+  details[open].panel > summary::after { content: "–"; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-grid .full { grid-column: 1 / -1; }
+  .field { display: grid; gap: 4px; }
+  .field label, .field .lbl { font-size: .85rem; font-weight: 700; color: var(--muted); }
+  .check { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+  .check input { width: 20px; height: 20px; accent-color: var(--leek); }
+  .saved-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: .95rem; }
+  .saved-list li { display: flex; justify-content: space-between; gap: 10px; padding: 8px 12px; border-radius: 12px; background: var(--surface-2); }
+  .saved-list li span:last-child { color: var(--muted); font-size: .85rem; white-space: nowrap; }
+
+  footer { color: var(--muted); font-size: .88rem; display: grid; gap: 6px; }
+  footer .links a { color: var(--muted); }
+
+  .toast {
+    position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
+    background: var(--ink); color: var(--bg); padding: 12px 18px; border-radius: 14px; font-weight: 600;
+    max-width: calc(100% - 32px); box-shadow: var(--shadow); z-index: 10;
+  }
+
+  @media (max-width: 480px) {
+    .steps { padding: 4px 14px; }
+    .step { grid-template-columns: 28px 1fr; }
+    .step-num { width: 26px; height: 26px; line-height: 26px; font-size: .85rem; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <h1>Choose My <span>Meal</span></h1>
+      <p>Chessy &amp; Duffy's dinner decider. No beef, ever.</p>
+    </div>
+    <button class="btn btn-bean" id="justPick" type="button">🎲 Just pick for us</button>
+  </header>
+
+  <form class="steps" id="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h2>When are we eating?</h2>
+      <div class="step-body">
+        <p class="hint">It's <span class="clock" id="clock">--:--</span>. Change the day if you're planning ahead.</p>
+        <fieldset class="chips" id="day"><legend>Day</legend></fieldset>
+        <p class="hint">How long have we got?</p>
+        <fieldset class="chips" id="time"><legend>Time available</legend></fieldset>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h2>What's the vibe?</h2>
+      <div class="step-body"><fieldset class="chips" id="vibe"><legend>Vibe</legend></fieldset></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h2>Whose kitchen?</h2>
+      <div class="step-body"><fieldset class="chips" id="house"><legend>Kitchen</legend></fieldset></div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h2>Protein?</h2>
+      <div class="step-body"><fieldset class="chips" id="protein"><legend>Protein</legend></fieldset></div>
+    </div>
+  </form>
+
+  <section id="results" aria-live="polite" style="display:grid;gap:14px">
+    <div class="section-head">
+      <div>
+        <h2>Tonight's two</h2>
+        <p class="summary" id="summary"></p>
+      </div>
+      <button class="btn btn-ghost" id="shuffle" type="button">↻ Shuffle</button>
+    </div>
+    <p class="note" id="relaxNote" hidden></p>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section class="panel" id="neither">
+    <h2>🙅 Neither of those?</h2>
+    <p class="hint">Tell us what you're after and Claude will find another idea with a link to the recipe.</p>
+    <label class="hint" for="wish" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">What are you in the mood for?</label>
+    <textarea id="wish" placeholder="e.g. something spicy with leeks, no oven, ready in 40 minutes"></textarea>
+    <div class="row-actions">
+      <button class="btn btn-primary" id="findAnother" type="button">Find another idea</button>
+      <button class="btn btn-ghost" id="stopFind" type="button" hidden>Stop</button>
+      <button class="btn btn-ghost" id="copyPrompt" type="button" hidden>Copy request for Claude</button>
+    </div>
+    <p class="status" id="findStatus"></p>
+    <div id="aiResult"></div>
+  </section>
+
+  <details class="panel" id="addPanel">
+    <summary>➕ Add a recipe</summary>
+    <p class="hint">Saw something good on a reel? Save it here and it joins the suggestions. Everyone with the link sees it.</p>
+    <form id="addForm" class="form-grid">
+      <div class="field full">
+        <label for="addName">Recipe name</label>
+        <input type="text" id="addName" required maxlength="120" placeholder="Crispy chorizo butter beans">
+      </div>
+      <div class="field full">
+        <label for="addUrl">Link (reel or recipe page)</label>
+        <input type="url" id="addUrl" placeholder="https://www.instagram.com/reel/…">
+      </div>
+      <div class="field">
+        <label for="addProtein">Protein</label>
+        <select id="addProtein">
+          <option value="chicken">Chicken</option>
+          <option value="lamb">Lamb</option>
+          <option value="pork">Pork / chorizo</option>
+          <option value="fish">Fish</option>
+          <option value="seafood">Prawns / seafood</option>
+          <option value="veg">Veggie</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="addMins">Minutes, start to plate</label>
+        <input type="number" id="addMins" min="5" max="600" step="5" value="30">
+      </div>
+      <div class="field">
+        <label for="addKind">Is it…</label>
+        <select id="addKind">
+          <option value="new">A new idea to try</option>
+          <option value="fav">One of our favourites</option>
+        </select>
+      </div>
+      <div class="field" style="align-content:end">
+        <label class="check"><input type="checkbox" id="addOnePot"> One-pot / one-tray</label>
+      </div>
+      <div class="field full">
+        <label for="addIng">Main ingredients (comma separated, optional)</label>
+        <input type="text" id="addIng" placeholder="chorizo, butter beans, leeks, lemon">
+      </div>
+      <div class="full row-actions">
+        <button class="btn btn-primary" type="submit" id="addSave">Save recipe</button>
+      </div>
+      <p class="status full" id="addStatus"></p>
+    </form>
+    <ul class="saved-list" id="savedList"></ul>
+  </details>
+
+  <footer>
+    <div>Inspiration:</div>
+    <div class="links" id="inspo"></div>
+    <div>⚠️ tags mean the recipe as written has dairy or sesame, so swap before cooking.</div>
+  </footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script src="recipes.js"></script>
+<script>
+(function () {
+  const R = window.RECIPES;
+  const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const TIMES = [
+    { v: "30", label: "Under 30 min", limit: 35 },
+    { v: "60", label: "30–60 min", limit: 65 },
+    { v: "120", label: "1–2 hours", limit: 130 },
+    { v: "all", label: "All evening", limit: Infinity }
+  ];
+  const VIBES = [
+    { v: "weekend", label: "Weekend night", sub: "new & exciting" },
+    { v: "chill", label: "Chill", sub: "an old favourite" },
+    { v: "easy", label: "New but easy", sub: "pasta, rice, gnocchi, one-pots" }
+  ];
+  const HOUSES = [
+    { v: "chessy", label: "Chessy's house", sub: "Hartswood Road, well stocked" },
+    { v: "duffy", label: "Duffy's house", sub: "stock cubes & spices only" }
+  ];
+  const PROTEINS = [
+    { v: "chicken", label: "🐔 Chicken" }, { v: "lamb", label: "🐑 Lamb" },
+    { v: "pork", label: "🐖 Pork / chorizo" }, { v: "fish", label: "🐟 Fish" },
+    { v: "seafood", label: "🦐 Prawns / seafood" }, { v: "any", label: "✨ Surprise us" }
+  ];
+  const PROTEIN_WORD = { chicken: "chicken", lamb: "lamb", pork: "pork / chorizo", fish: "fish", seafood: "prawns / seafood", veg: "veggie", any: "any protein" };
+  const CARBY = /pasta|spaghetti|orzo|gnocchi|rice|noodle|risotto/i;
+
+  const $ = (id) => document.getElementById(id);
+  function el(tag, attrs, ...kids) {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs || {})) {
+      if (v == null || v === false) continue;
+      if (k === "class") n.className = v; else if (k === "text") n.textContent = v; else n.setAttribute(k, v === true ? "" : v);
+    }
+    for (const k of kids.flat()) if (k != null) n.append(k.nodeType ? k : document.createTextNode(String(k)));
+    return n;
+  }
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem("cmm." + k); return v == null ? d : JSON.parse(v); } catch { return d; } },
+    set(k, v) { try { localStorage.setItem("cmm." + k, JSON.stringify(v)); } catch {} }
+  };
+  function toast(msg) {
+    const t = $("toast"); t.textContent = msg; t.hidden = false;
+    clearTimeout(toast._t); toast._t = setTimeout(() => { t.hidden = true; }, 3200);
+  }
+
+  // ---------- State ----------
+  const now = new Date();
+  const state = {
+    day: now.getDay(),
+    time: defaultTime(now.getDay(), now.getHours()),
+    vibe: defaultVibe(now.getDay()),
+    house: store.get("house", "chessy"),
+    protein: "any"
+  };
+  let vibeTouched = false;
+  let added = [];          // recipes from the shared db
+  let lastShown = [];      // names shown in the current two
+  let seed = Math.random();
+
+  function defaultTime(day, hour) {
+    if (hour >= 20) return "30";
+    if (day === 5 || day === 6) return "120";
+    if (day === 0) return "120";
+    return "60";
+  }
+  function defaultVibe(day) {
+    if (day === 5 || day === 6) return "weekend";
+    if (day === 0) return "chill";
+    return "easy";
+  }
+
+  // ---------- Chip rendering ----------
+  function chips(container, name, items, current, onChange) {
+    const fs = $(container);
+    [...fs.querySelectorAll(".chip")].forEach((c) => c.remove());
+    for (const it of items) {
+      const id = container + "-" + it.v;
+      const input = el("input", { type: "radio", name, id, value: it.v });
+      input.checked = String(current) === String(it.v);
+      input.addEventListener("change", () => onChange(it.v));
+      const span = el("span", {}, it.label, it.sub ? el("small", { text: it.sub }) : null);
+      fs.append(el("label", { class: "chip" + (it.sub ? " chip-lg" : ""), for: id }, input, span));
+    }
+  }
+  function renderControls() {
+    chips("day", "day", DAYS.map((d, i) => ({ v: i, label: i === now.getDay() ? d + " (today)" : d })), state.day, (v) => {
+      state.day = Number(v);
+      if (!vibeTouched) { state.vibe = defaultVibe(state.day); if (state.day !== now.getDay()) state.time = defaultTime(state.day, 18); }
+      renderControls(); suggest();
+    });
+    chips("time", "time", TIMES.map((t) => ({ v: t.v, label: t.label })), state.time, (v) => {
+      state.time = v;
+      if (!vibeTouched && (v === "120" || v === "all") && (state.day === 5 || state.day === 6 || state.day === 0)) state.vibe = "weekend";
+      if (!vibeTouched && v === "30" && state.vibe === "weekend") state.vibe = "easy";
+      renderControls(); suggest();
+    });
+    chips("vibe", "vibe", VIBES, state.vibe, (v) => { state.vibe = v; vibeTouched = true; suggest(); });
+    chips("house", "house", HOUSES, state.house, (v) => { state.house = v; store.set("house", v); suggest(); });
+    chips("protein", "protein", PROTEINS, state.protein, (v) => { state.protein = v; suggest(); });
+  }
+  function tickClock() {
+    const d = new Date();
+    $("clock").textContent = d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) + " on " + DAY_NAMES[d.getDay()];
+  }
+
+  // ---------- Picking ----------
+  function allRecipes() {
+    const favs = R.favourites.map((r) => ({ ...r, kind: "fav" }));
+    const news = R.newIdeas.map((r) => ({ ...r, kind: "new" }));
+    const extra = added.map((r) => ({ ...r, kind: r.kind === "fav" ? "fav" : "new", added: true }));
+    return favs.concat(news, extra);
+  }
+  // Tiny seeded random so Shuffle changes things but re-renders don't.
+  function rand(str) {
+    let h = 2166136261 ^ Math.floor(seed * 1e9);
+    for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return ((h >>> 0) % 1000) / 1000;
+  }
+  function score(r) {
+    let s = rand(r.name) * 3;
+    if (r.onePot) s += 1.5;
+    if (r.loves) s += 1;
+    const ing = r.ing || [];
+    if (state.vibe === "weekend") { s += (r.effort || 1) * 0.9; if (r.mins >= 60) s += 0.8; }
+    if (state.vibe === "easy") { if (r.onePot) s += 1; if (CARBY.test(ing.join(" ") + " " + r.name)) s += 1.5; }
+    if (state.house === "duffy") { s -= 0.4 * Math.max(0, ing.length - 4); if (r.kit) s -= 4; }
+    const recent = store.get("cooked", []);
+    if (recent.includes(r.name)) s -= 2.5;
+    return s;
+  }
+  function pool(opts) {
+    const limit = TIMES.find((t) => t.v === state.time).limit * (opts.timeStretch || 1);
+    return allRecipes().filter((r) => {
+      if (/\bbeef\b/i.test(r.name)) return false;
+      if (state.vibe === "chill" ? r.kind !== "fav" : r.kind !== "new") return false;
+      if (state.vibe === "easy" && ((r.effort || 1) > 1 || r.mins > 50)) return false;
+      if (r.mins > limit) return false;
+      if (!opts.anyProtein) {
+        if (state.protein === "any") { /* anything */ }
+        else if (r.protein !== state.protein) return false;
+      }
+      return true;
+    });
+  }
+  function pickTwo() {
+    const tries = [
+      { note: "" },
+      { timeStretch: 1.6, note: "Not many options in that time, so one of these might run a little over." },
+      { anyProtein: true, note: "We couldn't find two " + PROTEIN_WORD[state.protein] + " options for this, so here are the closest." },
+      { anyProtein: true, timeStretch: 3, note: "Slim pickings for that combo, so here are the closest matches." }
+    ];
+    for (const t of tries) {
+      const list = pool(t).sort((a, b) => score(b) - score(a));
+      if (list.length >= 2) {
+        const first = list[0];
+        const second = list.find((r) => r !== first && (r.protein !== first.protein || r.cuisine !== first.cuisine)) || list[1];
+        return { picks: [first, second], note: t.note };
+      }
+    }
+    const list = allRecipes().filter((r) => r.kind === (state.vibe === "chill" ? "fav" : "new"));
+    return { picks: list.slice(0, 2), note: "Here are two to get you going." };
+  }
+
+  function googleLink(r) {
+    return "https://www.google.com/search?q=" + encodeURIComponent(r.name + " recipe" + (r.source ? " " + r.source : ""));
+  }
+  function fmtMins(m) {
+    if (m < 60) return m + " min";
+    const h = Math.floor(m / 60), mm = m % 60;
+    return h + " hr" + (h > 1 ? "s" : "") + (mm ? " " + mm : "");
+  }
+
+  function card(r, idx) {
+    const eyebrow = r.kind === "fav" ? (r.added ? "Our favourite · added by us" : "Our favourite") : (r.source ? "New · " + r.source : r.added ? "New · added by us" : "New idea");
+    const tags = el("div", { class: "meta" },
+      el("span", { class: "tag", text: "⏱ " + fmtMins(r.mins) }),
+      r.onePot ? el("span", { class: "tag", text: "One-pot" }) : null,
+      el("span", { class: "tag", text: PROTEIN_WORD[r.protein] || r.protein }),
+      r.loves ? el("span", { class: "tag love", text: "💛 your faves" }) : null,
+      r.dairy ? el("span", { class: "tag warn", text: "⚠️ dairy, swap needed" }) : null,
+      r.sesame ? el("span", { class: "tag warn", text: "⚠️ sesame" }) : null,
+      r.kit ? el("span", { class: "tag warn", text: "Needs " + r.kit }) : null
+    );
+    const ing = r.ing && r.ing.length ? el("div", {},
+      el("p", { class: "ing-label", text: state.house === "duffy" ? "To buy on the way to Duffy's" : "You'll need" }),
+      el("ul", { class: "ing" }, r.ing.map((i) => el("li", { text: i })))
+    ) : null;
+    const links = el("div", { class: "links" },
+      r.url ? el("a", { href: r.url, target: "_blank", rel: "noopener", text: "Open recipe ↗" }) : null,
+      el("a", { href: googleLink(r), target: "_blank", rel: "noopener", text: r.url ? "Search for it" : "Search for this recipe ↗" })
+    );
+    const cook = el("button", { class: "btn btn-primary", type: "button", text: "We'll cook this!" });
+    cook.addEventListener("click", () => cookThis(r.name));
+    return el("article", { class: "card" + (idx ? " pick-b" : "") },
+      el("div", { class: "eyebrow", text: eyebrow }),
+      el("h3", { text: r.name }),
+      tags,
+      r.note ? el("p", { class: "card-note", text: r.note }) : null,
+      ing,
+      links,
+      el("div", { class: "card-actions" }, cook)
+    );
+  }
+  function cookThis(name) {
+    const recent = store.get("cooked", []).filter((n) => n !== name);
+    recent.unshift(name); store.set("cooked", recent.slice(0, 6));
+    toast("Enjoy! " + name + " sits out the next few suggestions.");
+  }
+
+  function suggest() {
+    const { picks, note } = pickTwo();
+    lastShown = picks.map((p) => p.name);
+    $("cards").replaceChildren(...picks.map(card));
+    $("relaxNote").hidden = !note; $("relaxNote").textContent = note;
+    const t = TIMES.find((x) => x.v === state.time).label.toLowerCase();
+    const v = VIBES.find((x) => x.v === state.vibe).label.toLowerCase();
+    const h = state.house === "duffy" ? "at Duffy's" : "at Chessy's";
+    $("summary").textContent = DAY_NAMES[state.day] + " · " + t + " · " + v + " · " + h + " · " + PROTEIN_WORD[state.protein];
+  }
+
+  $("shuffle").addEventListener("click", () => { seed = Math.random(); suggest(); });
+  $("justPick").addEventListener("click", () => {
+    const d = new Date();
+    state.day = d.getDay();
+    state.time = defaultTime(state.day, d.getHours());
+    state.vibe = state.day >= 1 && state.day <= 4 ? (Math.random() < 0.5 ? "chill" : "easy") : defaultVibe(state.day);
+    state.protein = "any";
+    vibeTouched = false;
+    seed = Math.random();
+    renderControls(); suggest();
+    $("results").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  // ---------- "Neither!" — ask Claude ----------
+  let sample = null, findCtl = null;
+  function buildPrompt(wish) {
+    const catalogue = R.newIdeas.map((r) => "- " + r.name + " | " + r.source + " | " + r.url).join("\n");
+    const favs = R.favourites.map((r) => r.name).join("; ");
+    const extra = added.filter((r) => r.url).map((r) => "- " + r.name + " | added by us | " + r.url).join("\n");
+    return [
+      "You are helping a couple, Chessy and Duffy, decide what to cook for dinner tonight.",
+      "They rejected these two suggestions: " + lastShown.join(" and ") + ".",
+      "",
+      "What they want now, in their words: \"" + wish + "\"",
+      "",
+      "Their answers: day = " + DAY_NAMES[state.day] + "; time available = " + TIMES.find((x) => x.v === state.time).label +
+        "; vibe = " + VIBES.find((x) => x.v === state.vibe).label + " (" + VIBES.find((x) => x.v === state.vibe).sub + ")" +
+        "; kitchen = " + (state.house === "duffy" ? "Duffy's house, which only has stock cubes, spices, an oven and a hob (everything else must be bought)" : "Chessy's house, a well-stocked family kitchen") +
+        "; protein = " + PROTEIN_WORD[state.protein] + ".",
+      "",
+      "Rules: never beef. Chessy is dairy-free and sesame-free, but they adapt recipes themselves, so a recipe with dairy or sesame is fine as long as you flag it.",
+      "They love one-pot wonders, leeks, butter beans and chorizo, and recipes in the style of Anna's Family Kitchen, the Flavour Fellas, Mob, RecipeTin Eats and Instagram reels. They also want fresh ideas beyond their usual ingredients.",
+      "Dishes they already cook often (don't suggest these): " + favs + ".",
+      "",
+      "Recipes with verified links (use one of these if it fits what they asked for):",
+      catalogue + (extra ? "\n" + extra : ""),
+      "",
+      "Suggest ONE recipe that best fits what they asked. They always need a link to the source. If a recipe from the verified list fits, use its exact URL. Otherwise pick a real, published recipe from a well-known site (e.g. BBC Good Food, RecipeTin Eats, Mob, Jamie Oliver, Anna's Family Kitchen, Olive, Waitrose, NYT Cooking, Delicious, The Happy Foodie) and give its URL only if you are confident it exists; otherwise leave url empty.",
+      "",
+      "Reply with only a JSON object, no other text, in this shape:",
+      '{"name": "Recipe name", "source": "Site or author", "url": "https://...", "protein": "chicken|lamb|pork|fish|seafood|veg", "mins": 40, "onePot": true, "why": "One or two sentences on why it fits what they asked", "ingredients": ["main things to buy"], "method": ["4 to 6 short steps"], "dairy": false, "sesame": false, "swaps": "dairy/sesame swaps if needed, else empty"}'
+    ].join("\n");
+  }
+  function showAI(r) {
+    const recipe = {
+      name: String(r.name || "A new idea"), source: r.source ? String(r.source) : "", url: /^https?:\/\//.test(r.url || "") ? String(r.url) : "",
+      protein: String(r.protein || ""), mins: Number(r.mins) || 45, onePot: !!r.onePot, kind: "new",
+      ing: Array.isArray(r.ingredients) ? r.ingredients.map(String).slice(0, 12) : [], dairy: !!r.dairy, sesame: !!r.sesame
+    };
+    const c = card(recipe, 0);
+    const extras = [];
+    if (r.why) extras.push(el("p", { class: "card-note", text: String(r.why) }));
+    if (r.swaps) extras.push(el("p", { class: "card-note", text: "Swaps: " + String(r.swaps) }));
+    if (Array.isArray(r.method) && r.method.length) extras.push(el("ol", { class: "method" }, r.method.slice(0, 8).map((s) => el("li", { text: String(s) }))));
+    c.querySelector("h3").after(...extras);
+    if (db) {
+      const save = el("button", { class: "btn btn-ghost", type: "button", text: "Save to our recipes" });
+      save.addEventListener("click", async () => {
+        save.disabled = true;
+        try { await saveRecipe({ name: recipe.name, url: recipe.url || googleLink(recipe), protein: recipe.protein || "chicken", mins: recipe.mins, onePot: recipe.onePot, kind: "new", ing: recipe.ing, source: recipe.source }); save.textContent = "Saved ✓"; }
+        catch (e) { save.disabled = false; toast(dbErrorText(e)); }
+      });
+      c.querySelector(".card-actions").append(save);
+    }
+    $("aiResult").replaceChildren(c);
+  }
+  function sampleErrorText(code) {
+    switch (code) {
+      case "not_granted": case "sampling_disabled": case "not_declared": case "capability_disabled": case "capability_removed":
+        return "Claude isn't available here. Copy the request below and paste it into Claude instead.";
+      case "rate_limited": return "Claude is busy or you've hit your usage limit. Try again in a minute.";
+      case "session_expired": return "Please sign in to Claude again, then try once more.";
+      case "invalid_json": return "Claude's answer came back jumbled. Tap Find another idea to try again.";
+      case "refused": return "Claude couldn't help with that one. Try describing it differently.";
+      default: return "Something went wrong reaching Claude. Try again.";
+    }
+  }
+  function showCopyFallback() { $("copyPrompt").hidden = false; }
+  $("copyPrompt").addEventListener("click", async () => {
+    const text = buildPrompt($("wish").value.trim() || "anything new and tasty");
+    try { await navigator.clipboard.writeText(text); toast("Copied. Paste it into Claude."); }
+    catch { $("findStatus").textContent = "Couldn't copy automatically. Here's the request:"; $("aiResult").replaceChildren(el("textarea", { readonly: true, text: text })); }
+  });
+  $("findAnother").addEventListener("click", async () => {
+    const wish = $("wish").value.trim();
+    if (!wish) { $("findStatus").textContent = "Type what you're in the mood for first, e.g. \"something spicy with leeks\"."; $("wish").focus(); return; }
+    if (!sample) { $("findStatus").textContent = "Claude isn't available here. Copy the request and paste it into Claude instead."; showCopyFallback(); return; }
+    findCtl = new AbortController();
+    $("findAnother").disabled = true; $("stopFind").hidden = false;
+    $("findStatus").textContent = "Thinking… this can take up to a minute.";
+    try {
+      const r = await sample.json(buildPrompt(wish), { signal: findCtl.signal, cache: false });
+      if (!r || typeof r !== "object" || !r.name) throw { code: "invalid_json" };
+      showAI(r);
+      $("findStatus").textContent = r.url ? "Here's one. Check the link opens the right recipe before you shop." : "Here's one. We couldn't confirm a link, so use Search for this recipe.";
+    } catch (e) {
+      if (e && e.code === "cancelled") $("findStatus").textContent = "Stopped.";
+      else {
+        $("findStatus").textContent = sampleErrorText(e && e.code);
+        if (e && ["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"].includes(e.code)) { sample = null; showCopyFallback(); }
+      }
+    } finally {
+      $("findAnother").disabled = false; $("stopFind").hidden = true;
+    }
+  });
+  $("stopFind").addEventListener("click", () => findCtl && findCtl.abort());
+
+  // ---------- Added recipes (shared db) ----------
+  let db = null;
+  function dbErrorText(e) {
+    const code = e && e.code;
+    if (code === "permission_denied" || code === "not_granted") return "You don't have permission to add recipes. Ask Chessy to share the page with you as a Contributor.";
+    return "Couldn't save just now. Try again.";
+  }
+  async function saveRecipe(r) {
+    if (/\bbeef\b/i.test(r.name)) throw { code: "beef" };
+    await db.collection("recipes").add({ ...r, addedAt: Date.now() });
+  }
+  function renderSaved() {
+    const list = $("savedList");
+    if (!added.length) { list.replaceChildren(); return; }
+    list.replaceChildren(
+      el("li", {}, el("strong", { text: "Saved by us" }), el("span", { text: added.length + (added.length === 1 ? " recipe" : " recipes") })),
+      ...added.map((r) => el("li", {},
+        r.url ? el("a", { href: r.url, target: "_blank", rel: "noopener", text: r.name }) : el("span", { text: r.name }),
+        el("span", { text: (r.kind === "fav" ? "favourite" : "new") + " · " + fmtMins(r.mins) })
+      ))
+    );
+  }
+  $("addForm").addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const name = $("addName").value.trim();
+    if (!name) return;
+    if (/\bbeef\b/i.test(name)) { $("addStatus").textContent = "No beef allowed! Try a different protein."; return; }
+    if (!db) { $("addStatus").textContent = "Saving recipes only works on the published page."; return; }
+    const url = $("addUrl").value.trim();
+    const rec = {
+      name, url: /^https?:\/\//.test(url) ? url : "", protein: $("addProtein").value,
+      mins: Math.max(5, Number($("addMins").value) || 30), onePot: $("addOnePot").checked, kind: $("addKind").value,
+      ing: $("addIng").value.split(",").map((s) => s.trim()).filter(Boolean).slice(0, 12),
+      loves: /leek|butter bean|chorizo/i.test(name + " " + $("addIng").value)
+    };
+    $("addSave").disabled = true; $("addStatus").textContent = "Saving…";
+    try {
+      await saveRecipe(rec);
+      $("addForm").reset(); $("addMins").value = 30;
+      $("addStatus").textContent = "Saved! It's in the suggestion pool now.";
+    } catch (e) { $("addStatus").textContent = dbErrorText(e); }
+    finally { $("addSave").disabled = false; }
+  });
+
+  // ---------- Footer ----------
+  $("inspo").replaceChildren(...R.inspiration.map((s) => el("a", { href: s.url, target: "_blank", rel: "noopener", text: s.name })));
+
+  // ---------- Boot ----------
+  renderControls(); tickClock(); setInterval(tickClock, 30000); suggest();
+
+  if (window.claude && window.claude.use) {
+    window.claude.use("sample").then((s) => { sample = s; if (!s) showCopyFallback(); });
+    window.claude.use("db").then((d) => {
+      db = d;
+      if (!d) { $("addStatus").textContent = "Saving recipes only works on the published page."; return; }
+      d.collection("recipes").orderBy("addedAt", "desc").onSnapshot((snap) => {
+        added = snap.docs.map((doc) => doc.data()).filter((r) => r && typeof r.name === "string" && !/\bbeef\b/i.test(r.name))
+          .map((r) => ({ name: r.name, url: typeof r.url === "string" && /^https?:\/\//.test(r.url) ? r.url : "", protein: String(r.protein || "chicken"),
+            mins: Number(r.mins) || 30, onePot: !!r.onePot, kind: r.kind === "fav" ? "fav" : "new", ing: Array.isArray(r.ing) ? r.ing.map(String) : [],
+            loves: !!r.loves, source: typeof r.source === "string" ? r.source : "", effort: 1 }));
+        renderSaved();
+      }, () => {});
+    });
+  } else {
+    showCopyFallback();
+    $("addStatus").textContent = "Saving recipes only works on the published page.";
+  }
+})();
+</script>
