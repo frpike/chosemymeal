@@ -2,7 +2,8 @@
 //
 // Each recipe:
 //   name     – what we call it
-//   protein  – chicken | lamb | pork | fish | seafood | veg
+//   protein  – chicken | lamb | pork | chorizo | fish | seafood | veg
+//              (the Chorizo button also matches anything with chorizo in it)
 //   mins     – rough total time, start to plate
 //   effort   – 1 (easy) to 3 (a project)
 //   onePot   – true if it's a one-pot / one-tray
@@ -12,6 +13,7 @@
 //   dairy / sesame – true if the recipe as written contains it (we adapt).
 //                    Left off our favourites because we've already adapted them.
 //   url      – source link (always set for new ideas)
+//   img      – preview photo, e.g. "img/cod-chorizo-one-pot.jpg" (filled in by tools/fetch-images.py)
 //   loves    – true if it uses leeks, butter beans or chorizo
 //
 // Beef is never allowed. Add new ones at the bottom of the right list.
@@ -47,7 +49,7 @@ window.RECIPES = {
       ing: ["lamb mince", "cabbage", "onion", "tinned tomatoes"] },
     { name: "Potato, pepper and broccoli frittata", protein: "veg", mins: 30, effort: 1, onePot: true, cuisine: "spanish",
       ing: ["eggs", "potatoes", "peppers", "broccoli"] },
-    { name: "Spelt with chorizo, sweet potato, red onion and spinach", protein: "pork", mins: 45, effort: 1, onePot: true, cuisine: "spanish", loves: true,
+    { name: "Spelt with chorizo, sweet potato, red onion and spinach", protein: "chorizo", mins: 45, effort: 1, onePot: true, cuisine: "spanish", loves: true,
       ing: ["spelt", "chorizo", "sweet potato", "red onion", "spinach"] },
     { name: "Harissa chicken with leeks, potatoes and yogurt", protein: "chicken", mins: 50, effort: 1, onePot: true, cuisine: "north-african", loves: true,
       ing: ["chicken thighs", "leeks", "potatoes", "harissa", "dairy-free yogurt"] },
@@ -58,7 +60,7 @@ window.RECIPES = {
     { name: "Chicken, leek, bacon and bean traybake", protein: "chicken", mins: 55, effort: 1, onePot: true, cuisine: "british", loves: true,
       ing: ["chicken thighs", "bacon", "leeks", "cannellini beans", "white wine"],
       url: "https://annasfamilykitchen.com/recipes/chicken-leek-bacon-bean-traybake/" },
-    { name: "Caldo verde", protein: "pork", mins: 40, effort: 1, onePot: true, cuisine: "portuguese", loves: true,
+    { name: "Caldo verde", protein: "chorizo", mins: 40, effort: 1, onePot: true, cuisine: "portuguese", loves: true,
       ing: ["chorizo", "potatoes", "kale or cavolo nero", "onion"] },
     { name: "Seafood and chorizo paella", protein: "seafood", mins: 60, effort: 2, onePot: true, cuisine: "spanish", loves: true,
       ing: ["paella rice", "chorizo", "prawns", "mussels or squid", "peppers", "peas", "saffron"] },
@@ -155,7 +157,7 @@ window.RECIPES = {
 
     // Mob
     { name: "One pan chorizo gnocchi", source: "Mob", url: "https://www.mob.co.uk/recipes/one-pan-gnocchi",
-      protein: "pork", mins: 25, effort: 1, onePot: true, cuisine: "italian", loves: true,
+      protein: "chorizo", mins: 25, effort: 1, onePot: true, cuisine: "italian", loves: true,
       ing: ["gnocchi", "chorizo", "cherry tomatoes", "spinach", "garlic"] },
     { name: "Meatball gnocchi bake (use pork mince)", source: "Mob", url: "https://www.mob.co.uk/recipes/meatball-gnocchi-bake",
       protein: "pork", mins: 50, effort: 2, onePot: true, cuisine: "italian", dairy: true,
@@ -163,13 +165,13 @@ window.RECIPES = {
 
     // Others
     { name: "Leek, butter bean and chorizo gratin", source: "Good Food", url: "https://www.bbcgoodfoodme.com/recipes/leek-butter-bean-and-chorizo-gratin/",
-      protein: "pork", mins: 45, effort: 1, onePot: true, cuisine: "spanish", dairy: true, loves: true,
+      protein: "chorizo", mins: 45, effort: 1, onePot: true, cuisine: "spanish", dairy: true, loves: true,
       ing: ["leeks", "butter beans", "chorizo", "sherry", "breadcrumbs"] },
     { name: "Chorizo and butter bean stew", source: "Justine Pattison", url: "https://www.justinepattison.com/recipe/chorizo-and-butter-bean-stew/",
-      protein: "pork", mins: 30, effort: 1, onePot: true, cuisine: "spanish", loves: true,
+      protein: "chorizo", mins: 30, effort: 1, onePot: true, cuisine: "spanish", loves: true,
       ing: ["chorizo", "butter beans", "onion", "peppers", "tinned tomatoes", "crusty bread"] },
     { name: "Crispy roasted gnocchi with chorizo and veg", source: "Beat The Budget", url: "https://beatthebudget.com/recipe/crispy-roasted-gnocchi-with-chorizo-and-vegetables/",
-      protein: "pork", mins: 50, effort: 1, onePot: true, cuisine: "italian", loves: true,
+      protein: "chorizo", mins: 50, effort: 1, onePot: true, cuisine: "italian", loves: true,
       ing: ["gnocchi", "chorizo", "cherry tomatoes", "aubergine", "courgette", "basil"] },
     { name: "Harissa chicken traybake with chorizo and gnocchi", source: "Ocado", url: "https://www.ocado.com/recipes/harissa-chicken-traybake-with-chorizo-and-gnocchi/223479",
       protein: "chicken", mins: 45, effort: 1, onePot: true, cuisine: "north-african", loves: true,

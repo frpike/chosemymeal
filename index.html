@@ -136,6 +136,10 @@
     display: flex; flex-direction: column; gap: 12px; border-top: 6px solid var(--leek);
   }
   .card.pick-b { border-top-color: var(--bean-ink); }
+  .photo { display: block; margin: -18px -18px 2px; aspect-ratio: 16 / 10; overflow: hidden; background: var(--leek-soft); }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card.has-photo { border-top: 0; overflow: hidden; }
+  .card.has-photo .eyebrow { color: var(--leek); }
   .eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   .card h3 { font-size: 1.3rem; font-weight: 700; }
   .meta { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -203,7 +207,7 @@
   <header>
     <div class="brand">
       <h1>Choose My <span>Meal</span></h1>
-      <p>Chessy &amp; Duffy's dinner decider. No beef, ever.</p>
+      <p>Chessy &amp; Duffy's dinner decider</p>
     </div>
     <button class="btn btn-bean" id="justPick" type="button">🎲 Just pick for us</button>
   </header>
@@ -279,7 +283,8 @@
         <select id="addProtein">
           <option value="chicken">Chicken</option>
           <option value="lamb">Lamb</option>
-          <option value="pork">Pork / chorizo</option>
+          <option value="pork">Pork</option>
+          <option value="chorizo">Chorizo</option>
           <option value="fish">Fish</option>
           <option value="seafood">Prawns / seafood</option>
           <option value="veg">Veggie</option>
@@ -342,10 +347,10 @@
   ];
   const PROTEINS = [
     { v: "chicken", label: "🐔 Chicken" }, { v: "lamb", label: "🐑 Lamb" },
-    { v: "pork", label: "🐖 Pork / chorizo" }, { v: "fish", label: "🐟 Fish" },
+    { v: "pork", label: "🐖 Pork" }, { v: "chorizo", label: "🌶️ Chorizo" }, { v: "fish", label: "🐟 Fish" },
     { v: "seafood", label: "🦐 Prawns / seafood" }, { v: "any", label: "✨ Surprise us" }
   ];
-  const PROTEIN_WORD = { chicken: "chicken", lamb: "lamb", pork: "pork / chorizo", fish: "fish", seafood: "prawns / seafood", veg: "veggie", any: "any protein" };
+  const PROTEIN_WORD = { chicken: "chicken", lamb: "lamb", pork: "pork", chorizo: "chorizo", fish: "fish", seafood: "prawns / seafood", veg: "veggie", any: "any protein" };
   const CARBY = /pasta|spaghetti|orzo|gnocchi|rice|noodle|risotto/i;
 
   const $ = (id) => document.getElementById(id);
@@ -461,6 +466,7 @@
       if (r.mins > limit) return false;
       if (!opts.anyProtein) {
         if (state.protein === "any") { /* anything */ }
+        else if (state.protein === "chorizo") { if (r.protein !== "chorizo" && !/chorizo/i.test(r.name + " " + (r.ing || []).join(" "))) return false; }
         else if (r.protein !== state.protein) return false;
       }
       return true;
@@ -515,7 +521,11 @@
     );
     const cook = el("button", { class: "btn btn-primary", type: "button", text: "We'll cook this!" });
     cook.addEventListener("click", () => cookThis(r.name));
-    return el("article", { class: "card" + (idx ? " pick-b" : "") },
+    const photo = r.img ? el("a", { class: "photo", href: r.url || googleLink(r), target: "_blank", rel: "noopener", "aria-label": "Open recipe: " + r.name },
+      el("img", { src: r.img, alt: r.name, loading: "lazy" })) : null;
+    if (photo) photo.querySelector("img").addEventListener("error", () => photo.remove());
+    return el("article", { class: "card" + (idx ? " pick-b" : "") + (photo ? " has-photo" : "") },
+      photo,
       el("div", { class: "eyebrow", text: eyebrow }),
       el("h3", { text: r.name }),
       tags,
@@ -582,7 +592,7 @@
       "Suggest ONE recipe that best fits what they asked. They always need a link to the source. If a recipe from the verified list fits, use its exact URL. Otherwise pick a real, published recipe from a well-known site (e.g. BBC Good Food, RecipeTin Eats, Mob, Jamie Oliver, Anna's Family Kitchen, Olive, Waitrose, NYT Cooking, Delicious, The Happy Foodie) and give its URL only if you are confident it exists; otherwise leave url empty.",
       "",
       "Reply with only a JSON object, no other text, in this shape:",
-      '{"name": "Recipe name", "source": "Site or author", "url": "https://...", "protein": "chicken|lamb|pork|fish|seafood|veg", "mins": 40, "onePot": true, "why": "One or two sentences on why it fits what they asked", "ingredients": ["main things to buy"], "method": ["4 to 6 short steps"], "dairy": false, "sesame": false, "swaps": "dairy/sesame swaps if needed, else empty"}'
+      '{"name": "Recipe name", "source": "Site or author", "url": "https://...", "protein": "chicken|lamb|pork|chorizo|fish|seafood|veg", "mins": 40, "onePot": true, "why": "One or two sentences on why it fits what they asked", "ingredients": ["main things to buy"], "method": ["4 to 6 short steps"], "dairy": false, "sesame": false, "swaps": "dairy/sesame swaps if needed, else empty"}'
     ].join("\n");
   }
   function showAI(r) {

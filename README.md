@@ -7,7 +7,7 @@ Chessy & Duffy's dinner decider. Answer four quick questions and get two dinner 
 1. **When?** Day and current time are filled in for you. Pick how long you've got.
 2. **Vibe?** *Weekend night* (new & exciting), *Chill* (one of our favourites) or *New but easy*.
 3. **Whose kitchen?** At Duffy's (stock cubes, spices, oven and hob only), shorter shopping lists win and recipes needing a blender or sushi mat drop down. Each card shows what to buy.
-4. **Protein?** Chicken, lamb, pork/chorizo, fish, prawns/seafood, or surprise us. Never beef.
+4. **Protein?** Chicken, lamb, pork, chorizo, fish, prawns/seafood, or surprise us. Chorizo also picks up dishes like chicken & chorizo orzo. Beef is never suggested.
 
 You get two suggestions, picked to be different from each other. **Shuffle** re-rolls them, and **🎲 Just pick for us** skips the questions. **We'll cook this!** keeps that dish out of the next few suggestions (remembered on that phone).
 
@@ -21,6 +21,16 @@ You get two suggestions, picked to be different from each other. **Shuffle** re-
 
 - `index.html` is the app.
 - `recipes.js` has all the recipes: `favourites` (our usual mains) and `newIdeas` (new recipes, each with a source link). To add one permanently, copy an existing entry and edit it. The fields are explained at the top of the file.
+
+## Recipe photos
+
+New ideas show a preview photo from their recipe page. The published page can't load pictures from other websites, so photos are downloaded into `img/` and published with the page:
+
+```
+NODE_PATH=$(npm root -g) node tools/fetch-images.js
+```
+
+This needs internet access to the recipe sites. It only fetches photos that are missing, and adds the `img` field to each recipe in `recipes.js`.
 
 ## Running it locally
 
