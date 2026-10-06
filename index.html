@@ -4,7 +4,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#F2F4F7">
 <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAFHElEQVR4nO3dQY7cNhCFYU6Qa8XbLHygADlAgBwp6xxsvKAhCO55M6REsl5R/7cOYKnwd1HdiK239+/fCvCR36IvAL6IAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQPo9+gLCvP31d/t//P7vP/OuxNbbQ/4idVcKLZ6Qy85xDA9C2TWUDeNY1sSrzSrZJ47AJl7tUckOcVhlcZY9kdxx2GZxljeRrHGkyOIsYyL54kiXxVmuRJL9Qpq6jJLt+tNsjlxj/VKKFZJjc2xWRklyR+6bY94Q3//4s+My/v9v1mUYrxDrOMaW0VXD58a2YtuHbxyjyhjYxKtRlXj24RjHkCymNvFqSCVuidjFcb+MxVmc3U/Eqg+vOG6WEZjF2c1EfPowiuNOGSZZnN1JxKQPlzgul2GYxdnlRBz6sPgRbNcyyo0rdPiVLH5zXJuCfxa/uLZCYveHxebola6MkvOag+O4sDYyTrm6cOWxh0vksdJ753mz+EXvERN1uIRtjseWUfrvJWp/5Hjm2KmMKsUdxcTR91cRM8zxgr7/ZyBieQTEQRkH8z6sj5W9y6ic73F1HA4//OW1eHpL4+BA+ZDt4WJ6rDynjMrzftfF0Z6856Rma7/rZcvDdHPAwaI4WBst3JaH1+Z4chmV1QRWxMHX1xkWTNVoc1h9aAL5zGF6HKyNeWbP1mVz+HxcHJhMwyUOGJobR+PeM/mgWGmcydSThc0BKT4O1oYSPpmJcfA9ZY15c47fHLAVHEf45jQXOx82B6RZcfDAsdKkaUduDs6UFoFT4liBRByQiAMScUCaEkfLwzNPo+1aZjXjCwubAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQekKXG0/Cv/897xvJ+WWc14swKbAxJxQCIOSMQBKTIOnklbBE5pVhwO78x9jknT5liBFP3qUE6WT8XOh80BaWIcPHasMW/O8ZuDk0UJn0x8HLA1N47GjRf+ETHUOJOpZzebA5JLHCyPM5NpTI+D7yzzzJ6ty+YoNh+XcD5zWBEHy2OGBVM12hzF6UMTxWoCi+Joz9xqOou13/uaZey1OWBlXRwsj8+5rY1iuzme1ofn/S6Noyt5z3nN0HWnK7/6rd4cfK29Y/H0TI+V6gnLw/keA+LgcDnYHihVzOagj2JfRjE/Vg779ZHijsLi6P0opJhmo957iXqKf3v//i3kD/75x/f/W/+pX7dwIfHA73fRrw7tv/O8KyRXGSU8jmsy9pHymmOPlZ8XcfVFMimOmMtZhP9gaLE5Lk/B/+OYt4xisjmqOy+iMlwhd8J1KKNYxVFuv6jMJJGb+8ykjOIWRxnxIrvARO4fcz5lFMM4yqAXHS5OZMjTj1UZxTOOatS7MKdWMuqJ2C2LyjeOMvpdqQMrGfstybOMYh5HmfMu3aqrlXnfmW3LKP5xVPMSCeScRWXxI9iX/OfYK8Ud5dgchw1WSIosqhyb45Bosh/Kdf3JNsch3QrJlUWVNY4qRSIZs6hyx1HZJpI3i2qHOCqrRLJnUe0TxyGwkj2aOGwYx2FZJZs1cdg5jrPhoewaxNlT4njVlcsTUnj13DjwpWS/kGIl4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oD0AygJypLE6viCAAAAAElFTkSuQmCC">
-<meta name="app-version" content="2026-10-06T22:20:09.529Z">
+<meta name="app-version" content="2026-10-06T22:24:23.373Z">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
@@ -203,7 +203,7 @@
 
   <nav class="tabs" id="tabs">
     <button class="tab-btn active" id="tabDecide" type="button">Tonight's pick</button>
-    <button class="tab-btn" id="tabBrowse" type="button">All recipes</button>
+    <button class="tab-btn" id="tabBrowse" type="button">To try</button>
   </nav>
 
   <div id="decideView">
@@ -265,7 +265,7 @@
   <div id="browseView" hidden>
     <div class="section-head">
       <div>
-        <h2>All recipes</h2>
+        <h2>To try</h2>
         <p class="summary" id="browseSummary"></p>
       </div>
     </div>
@@ -274,6 +274,7 @@
       <fieldset class="chips" id="browseProtein"><legend>Protein</legend></fieldset>
     </div>
     <div class="cards" id="browseCards"></div>
+    <p class="hint" id="browseEmpty" hidden>Nothing saved yet — use ➕ Add a recipe below to log a reel or link, and it'll show up here until you've cooked it.</p>
   </div>
 
   <details class="panel" id="addPanel">
@@ -483,18 +484,21 @@
     return favs.concat(news, extra);
   }
 
-  // ---------- Browse all ----------
+  // ---------- To try (just what we've logged from links, not cooked yet) ----------
   function renderBrowse() {
     const q = ($("browseSearch").value || "").trim().toLowerCase();
-    const list = allRecipes()
+    const list = added
       .filter((r) => !/\bbeef\b/i.test(r.name))
       .filter((r) => state.browseProtein === "any"
         || r.protein === state.browseProtein
         || (state.browseProtein === "chorizo" && /chorizo/i.test(r.name + " " + (r.ing || []).join(" "))))
       .filter((r) => !q || r.name.toLowerCase().includes(q) || (r.ing || []).some((i) => i.toLowerCase().includes(q)))
       .sort((a, b) => a.name.localeCompare(b.name));
-    $("browseSummary").textContent = list.length + (list.length === 1 ? " recipe" : " recipes") + (q || state.browseProtein !== "any" ? " matching" : " in total");
+    $("browseSummary").textContent = added.length
+      ? list.length + (list.length === 1 ? " recipe" : " recipes") + (q || state.browseProtein !== "any" ? " matching" : " saved")
+      : "";
     $("browseCards").replaceChildren(...list.map((r) => card(r, 0)));
+    $("browseEmpty").hidden = added.length > 0;
   }
   // Tiny seeded random so Shuffle changes things but re-renders don't.
   function rand(str) {
