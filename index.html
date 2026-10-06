@@ -660,11 +660,9 @@
   // Paste your own project's values here -- see README.md "Shared add-recipe (Supabase)".
   // The anon key is meant to be public; it's only as permissive as the table's row-level
   // security policies, set up per the README's SQL.
-  const SUPABASE_URL = "https://YOUR-PROJECT.supabase.co";
-  const SUPABASE_ANON_KEY = "YOUR-ANON-PUBLIC-KEY";
-  const supa = (SUPABASE_URL.includes("YOUR-PROJECT") || !window.supabase)
-    ? null
-    : window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const SUPABASE_URL = "https://yhdhladmbuwcxvzgvyru.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InloZGhsYWRtYnV3Y3h2emd2eXJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEzMTkxODEsImV4cCI6MjEwNjg5NTE4MX0.Sq2Bl-wn6HgIvocIDo9Ikem1cyorubU7M82IsjjD0EI";
+  const supa = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
   function dbErrorText() { return "Couldn't save just now. Try again."; }
   async function saveRecipe(r) {
