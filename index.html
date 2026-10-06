@@ -4,7 +4,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#F2F4F7">
 <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAFHElEQVR4nO3dQY7cNhCFYU6Qa8XbLHygADlAgBwp6xxsvKAhCO55M6REsl5R/7cOYKnwd1HdiK239+/fCvCR36IvAL6IAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQPo9+gLCvP31d/t//P7vP/OuxNbbQ/4idVcKLZ6Qy85xDA9C2TWUDeNY1sSrzSrZJ47AJl7tUckOcVhlcZY9kdxx2GZxljeRrHGkyOIsYyL54kiXxVmuRJL9Qpq6jJLt+tNsjlxj/VKKFZJjc2xWRklyR+6bY94Q3//4s+My/v9v1mUYrxDrOMaW0VXD58a2YtuHbxyjyhjYxKtRlXj24RjHkCymNvFqSCVuidjFcb+MxVmc3U/Eqg+vOG6WEZjF2c1EfPowiuNOGSZZnN1JxKQPlzgul2GYxdnlRBz6sPgRbNcyyo0rdPiVLH5zXJuCfxa/uLZCYveHxebola6MkvOag+O4sDYyTrm6cOWxh0vksdJ753mz+EXvERN1uIRtjseWUfrvJWp/5Hjm2KmMKsUdxcTR91cRM8zxgr7/ZyBieQTEQRkH8z6sj5W9y6ic73F1HA4//OW1eHpL4+BA+ZDt4WJ6rDynjMrzftfF0Z6856Rma7/rZcvDdHPAwaI4WBst3JaH1+Z4chmV1QRWxMHX1xkWTNVoc1h9aAL5zGF6HKyNeWbP1mVz+HxcHJhMwyUOGJobR+PeM/mgWGmcydSThc0BKT4O1oYSPpmJcfA9ZY15c47fHLAVHEf45jQXOx82B6RZcfDAsdKkaUduDs6UFoFT4liBRByQiAMScUCaEkfLwzNPo+1aZjXjCwubAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQekKXG0/Cv/897xvJ+WWc14swKbAxJxQCIOSMQBKTIOnklbBE5pVhwO78x9jknT5liBFP3qUE6WT8XOh80BaWIcPHasMW/O8ZuDk0UJn0x8HLA1N47GjRf+ETHUOJOpZzebA5JLHCyPM5NpTI+D7yzzzJ6ty+YoNh+XcD5zWBEHy2OGBVM12hzF6UMTxWoCi+Joz9xqOou13/uaZey1OWBlXRwsj8+5rY1iuzme1ofn/S6Noyt5z3nN0HWnK7/6rd4cfK29Y/H0TI+V6gnLw/keA+LgcDnYHihVzOagj2JfRjE/Vg779ZHijsLi6P0opJhmo957iXqKf3v//i3kD/75x/f/W/+pX7dwIfHA73fRrw7tv/O8KyRXGSU8jmsy9pHymmOPlZ8XcfVFMimOmMtZhP9gaLE5Lk/B/+OYt4xisjmqOy+iMlwhd8J1KKNYxVFuv6jMJJGb+8ykjOIWRxnxIrvARO4fcz5lFMM4yqAXHS5OZMjTj1UZxTOOatS7MKdWMuqJ2C2LyjeOMvpdqQMrGfstybOMYh5HmfMu3aqrlXnfmW3LKP5xVPMSCeScRWXxI9iX/OfYK8Ud5dgchw1WSIosqhyb45Bosh/Kdf3JNsch3QrJlUWVNY4qRSIZs6hyx1HZJpI3i2qHOCqrRLJnUe0TxyGwkj2aOGwYx2FZJZs1cdg5jrPhoewaxNlT4njVlcsTUnj13DjwpWS/kGIl4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oD0AygJypLE6viCAAAAAElFTkSuQmCC">
-<meta name="app-version" content="2026-10-06T22:13:26.877Z">
+<meta name="app-version" content="2026-10-06T22:20:09.529Z">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
@@ -57,6 +57,18 @@
   .brand h1 { font-size: clamp(2rem, 7vw, 2.9rem); font-weight: 700; letter-spacing: -.02em; }
   .brand h1 span { color: var(--coral); }
   .brand p { margin: 4px 0 0; color: var(--muted); }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 4px; background: var(--surface-2); border-radius: 10px; padding: 4px; }
+  .tab-btn {
+    flex: 1; border: 0; background: transparent; color: var(--muted); cursor: pointer;
+    font: 600 .92rem var(--body); padding: 8px 12px; border-radius: 8px; transition: background .1s ease, color .1s ease;
+  }
+  .tab-btn.active { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+
+  /* Browse */
+  .browse-controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+  .browse-controls input { flex: 1; min-width: 180px; }
 
   /* Buttons */
   .btn {
@@ -189,6 +201,12 @@
     <button class="btn btn-teal" id="justPick" type="button">🎲 Just pick for us</button>
   </header>
 
+  <nav class="tabs" id="tabs">
+    <button class="tab-btn active" id="tabDecide" type="button">Tonight's pick</button>
+    <button class="tab-btn" id="tabBrowse" type="button">All recipes</button>
+  </nav>
+
+  <div id="decideView">
   <form class="steps" id="steps">
     <div class="step">
       <div class="step-num">1</div>
@@ -242,6 +260,21 @@
     <p class="status" id="findStatus"></p>
     <div id="aiResult"></div>
   </section>
+  </div>
+
+  <div id="browseView" hidden>
+    <div class="section-head">
+      <div>
+        <h2>All recipes</h2>
+        <p class="summary" id="browseSummary"></p>
+      </div>
+    </div>
+    <div class="browse-controls">
+      <input type="text" id="browseSearch" placeholder="Search by name or ingredient…">
+      <fieldset class="chips" id="browseProtein"><legend>Protein</legend></fieldset>
+    </div>
+    <div class="cards" id="browseCards"></div>
+  </div>
 
   <details class="panel" id="addPanel">
     <summary>➕ Add a recipe</summary>
@@ -355,6 +388,11 @@
     { v: "seafood", label: "🦐 Prawns / seafood" }, { v: "any", label: "✨ Surprise us" }
   ];
   const PROTEIN_WORD = { chicken: "chicken", lamb: "lamb", pork: "pork", chorizo: "chorizo", fish: "fish", seafood: "prawns / seafood", veg: "veggie", any: "any protein" };
+  const BROWSE_PROTEINS = [
+    { v: "any", label: "✨ All" }, { v: "chicken", label: "🐔 Chicken" }, { v: "lamb", label: "🐑 Lamb" },
+    { v: "pork", label: "🐖 Pork" }, { v: "chorizo", label: "🌶️ Chorizo" }, { v: "fish", label: "🐟 Fish" },
+    { v: "seafood", label: "🦐 Prawns / seafood" }, { v: "veg", label: "🥦 Veggie" }
+  ];
   const CARBY = /pasta|spaghetti|orzo|gnocchi|rice|noodle|risotto/i;
 
   const $ = (id) => document.getElementById(id);
@@ -383,7 +421,8 @@
     time: defaultTime(now.getDay(), now.getHours()),
     vibe: defaultVibe(now.getDay()),
     house: store.get("house", "chessy"),
-    protein: "any"
+    protein: "any",
+    browseProtein: "any"
   };
   let vibeTouched = false;
   let added = [];          // recipes from the shared db
@@ -442,6 +481,20 @@
     const news = R.newIdeas.map((r) => ({ ...r, kind: "new" }));
     const extra = added.map((r) => ({ ...r, kind: r.kind === "fav" ? "fav" : "new", added: true }));
     return favs.concat(news, extra);
+  }
+
+  // ---------- Browse all ----------
+  function renderBrowse() {
+    const q = ($("browseSearch").value || "").trim().toLowerCase();
+    const list = allRecipes()
+      .filter((r) => !/\bbeef\b/i.test(r.name))
+      .filter((r) => state.browseProtein === "any"
+        || r.protein === state.browseProtein
+        || (state.browseProtein === "chorizo" && /chorizo/i.test(r.name + " " + (r.ing || []).join(" "))))
+      .filter((r) => !q || r.name.toLowerCase().includes(q) || (r.ing || []).some((i) => i.toLowerCase().includes(q)))
+      .sort((a, b) => a.name.localeCompare(b.name));
+    $("browseSummary").textContent = list.length + (list.length === 1 ? " recipe" : " recipes") + (q || state.browseProtein !== "any" ? " matching" : " in total");
+    $("browseCards").replaceChildren(...list.map((r) => card(r, 0)));
   }
   // Tiny seeded random so Shuffle changes things but re-renders don't.
   function rand(str) {
@@ -733,6 +786,7 @@
     if (error) return;
     added = mapRows(data);
     renderSaved();
+    renderBrowse();
   }
   function renderSaved() {
     const list = $("savedList");
@@ -795,8 +849,20 @@
   // ---------- Footer ----------
   $("inspo").replaceChildren(...R.inspiration.map((s) => el("a", { href: s.url, target: "_blank", rel: "noopener", text: s.name })));
 
+  // ---------- Tabs ----------
+  $("tabDecide").addEventListener("click", () => {
+    $("tabDecide").classList.add("active"); $("tabBrowse").classList.remove("active");
+    $("decideView").hidden = false; $("browseView").hidden = true;
+  });
+  $("tabBrowse").addEventListener("click", () => {
+    $("tabBrowse").classList.add("active"); $("tabDecide").classList.remove("active");
+    $("browseView").hidden = false; $("decideView").hidden = true;
+  });
+  chips("browseProtein", "browseProtein", BROWSE_PROTEINS, state.browseProtein, (v) => { state.browseProtein = v; renderBrowse(); });
+  $("browseSearch").addEventListener("input", renderBrowse);
+
   // ---------- Boot ----------
-  renderControls(); tickClock(); setInterval(tickClock, 30000); suggest();
+  renderControls(); tickClock(); setInterval(tickClock, 30000); suggest(); renderBrowse();
 
   // AI suggestions: on claude.ai, sample.json() asks the viewer's own
   // Claude, free. Everywhere else, aiJSON() falls back to the Edge
