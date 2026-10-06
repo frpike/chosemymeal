@@ -1,64 +1,39 @@
 <title>Choose My Meal</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Choose My Meal">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#F2F4F7">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAFHElEQVR4nO3dQY7cNhCFYU6Qa8XbLHygADlAgBwp6xxsvKAhCO55M6REsl5R/7cOYKnwd1HdiK239+/fCvCR36IvAL6IAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQPo9+gLCvP31d/t//P7vP/OuxNbbQ/4idVcKLZ6Qy85xDA9C2TWUDeNY1sSrzSrZJ47AJl7tUckOcVhlcZY9kdxx2GZxljeRrHGkyOIsYyL54kiXxVmuRJL9Qpq6jJLt+tNsjlxj/VKKFZJjc2xWRklyR+6bY94Q3//4s+My/v9v1mUYrxDrOMaW0VXD58a2YtuHbxyjyhjYxKtRlXj24RjHkCymNvFqSCVuidjFcb+MxVmc3U/Eqg+vOG6WEZjF2c1EfPowiuNOGSZZnN1JxKQPlzgul2GYxdnlRBz6sPgRbNcyyo0rdPiVLH5zXJuCfxa/uLZCYveHxebola6MkvOag+O4sDYyTrm6cOWxh0vksdJ753mz+EXvERN1uIRtjseWUfrvJWp/5Hjm2KmMKsUdxcTR91cRM8zxgr7/ZyBieQTEQRkH8z6sj5W9y6ic73F1HA4//OW1eHpL4+BA+ZDt4WJ6rDynjMrzftfF0Z6856Rma7/rZcvDdHPAwaI4WBst3JaH1+Z4chmV1QRWxMHX1xkWTNVoc1h9aAL5zGF6HKyNeWbP1mVz+HxcHJhMwyUOGJobR+PeM/mgWGmcydSThc0BKT4O1oYSPpmJcfA9ZY15c47fHLAVHEf45jQXOx82B6RZcfDAsdKkaUduDs6UFoFT4liBRByQiAMScUCaEkfLwzNPo+1aZjXjCwubAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQekKXG0/Cv/897xvJ+WWc14swKbAxJxQCIOSMQBKTIOnklbBE5pVhwO78x9jknT5liBFP3qUE6WT8XOh80BaWIcPHasMW/O8ZuDk0UJn0x8HLA1N47GjRf+ETHUOJOpZzebA5JLHCyPM5NpTI+D7yzzzJ6ty+YoNh+XcD5zWBEHy2OGBVM12hzF6UMTxWoCi+Joz9xqOou13/uaZey1OWBlXRwsj8+5rY1iuzme1ofn/S6Noyt5z3nN0HWnK7/6rd4cfK29Y/H0TI+V6gnLw/keA+LgcDnYHihVzOagj2JfRjE/Vg779ZHijsLi6P0opJhmo957iXqKf3v//i3kD/75x/f/W/+pX7dwIfHA73fRrw7tv/O8KyRXGSU8jmsy9pHymmOPlZ8XcfVFMimOmMtZhP9gaLE5Lk/B/+OYt4xisjmqOy+iMlwhd8J1KKNYxVFuv6jMJJGb+8ykjOIWRxnxIrvARO4fcz5lFMM4yqAXHS5OZMjTj1UZxTOOatS7MKdWMuqJ2C2LyjeOMvpdqQMrGfstybOMYh5HmfMu3aqrlXnfmW3LKP5xVPMSCeScRWXxI9iX/OfYK8Ud5dgchw1WSIosqhyb45Bosh/Kdf3JNsch3QrJlUWVNY4qRSIZs6hyx1HZJpI3i2qHOCqrRLJnUe0TxyGwkj2aOGwYx2FZJZs1cdg5jrPhoewaxNlT4njVlcsTUnj13DjwpWS/kGIl4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oD0AygJypLE6viCAAAAAElFTkSuQmCC">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <style>
+  /* Design: a sleek kitchen dashboard, not a candlelit one. Light, cool
+     neutrals, crisp coral + teal as the two working accents (teal for
+     neutral/data chips, coral reserved for the primary action and the one
+     "loves" highlight), and IBM Plex Sans/Mono for a precise, technical
+     feel -- mono specifically for the clock and timing, like a readout. */
   :root {
-    --bg: #EEF2EA;
+    color-scheme: light;
+    --bg: #F2F4F7;
     --surface: #FFFFFF;
-    --surface-2: #F6F8F3;
-    --ink: #1B2A1F;
-    --muted: #5A685C;
-    --line: #D3DBCC;
-    --leek: #2E6A3E;
-    --leek-ink: #FFFFFF;
-    --leek-soft: #DCEBD7;
-    --bean: #F1E3AE;
-    --bean-ink: #5B4A12;
-    --chorizo: #B23F28;
-    --chorizo-soft: #F7DED6;
-    --focus: #2E6A3E;
-    --shadow: 0 1px 2px rgba(27, 42, 31, .06), 0 6px 20px rgba(27, 42, 31, .06);
-    --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
-    --body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      color-scheme: dark;
-      --bg: #111812;
-      --surface: #1A231C;
-      --surface-2: #151D17;
-      --ink: #E6EDE3;
-      --muted: #9AA99C;
-      --line: #2D3B30;
-      --leek: #86C793;
-      --leek-ink: #0F1A12;
-      --leek-soft: #213829;
-      --bean: #3A3319;
-      --bean-ink: #EBD88E;
-      --chorizo: #EE8A6E;
-      --chorizo-soft: #3A221C;
-      --focus: #86C793;
-      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.25);
-    }
-  }
-  :root[data-theme="dark"] {
-    color-scheme: dark;
-    --bg: #111812;
-    --surface: #1A231C;
-    --surface-2: #151D17;
-    --ink: #E6EDE3;
-    --muted: #9AA99C;
-    --line: #2D3B30;
-    --leek: #86C793;
-    --leek-ink: #0F1A12;
-    --leek-soft: #213829;
-    --bean: #3A3319;
-    --bean-ink: #EBD88E;
-    --chorizo: #EE8A6E;
-    --chorizo-soft: #3A221C;
-    --focus: #86C793;
-    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.25);
+    --surface-2: #EAEDF2;
+    --ink: #12151C;
+    --muted: #667085;
+    --line: #DCE1E8;
+    --coral: #FF4B3E;
+    --coral-dark: #D4372B;
+    --coral-ink: #FFFFFF;
+    --teal: #00C2B8;
+    --teal-ink: #065F5B;
+    --teal-soft: #DFF2F1;
+    --warn: #92400E;
+    --warn-soft: #FDECC8;
+    --focus: #FF4B3E;
+    --shadow: 0 1px 2px rgba(17,20,26,.05), 0 10px 24px rgba(17,20,26,.08);
+    --display: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", "SF Mono", Consolas, monospace;
   }
 
   * { box-sizing: border-box; }
@@ -72,80 +47,81 @@
   }
   .wrap { max-width: 720px; margin: 0 auto; display: grid; gap: 20px; }
   h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; line-height: 1.1; }
-  a { color: var(--leek); }
+  a { color: var(--coral-dark); }
   button, input, select, textarea { font: inherit; color: inherit; }
   :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
   /* Header */
   header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 16px; }
-  .brand h1 { font-size: clamp(2rem, 7vw, 2.9rem); font-weight: 800; letter-spacing: -.02em; }
-  .brand h1 span { color: var(--leek); }
+  .brand h1 { font-size: clamp(2rem, 7vw, 2.9rem); font-weight: 700; letter-spacing: -.02em; }
+  .brand h1 span { color: var(--coral); }
   .brand p { margin: 4px 0 0; color: var(--muted); }
 
   /* Buttons */
   .btn {
-    border: 0; border-radius: 999px; padding: 12px 20px; cursor: pointer;
-    font-weight: 700; display: inline-flex; align-items: center; gap: 8px; justify-content: center;
-    text-decoration: none; transition: transform .12s ease, background .12s ease;
+    border: 0; border-radius: 10px; padding: 12px 20px; cursor: pointer;
+    font-weight: 600; display: inline-flex; align-items: center; gap: 8px; justify-content: center;
+    text-decoration: none; transition: transform .1s ease, background .1s ease, box-shadow .1s ease;
   }
   .btn:active { transform: scale(.97); }
-  .btn-primary { background: var(--leek); color: var(--leek-ink); }
-  .btn-bean { background: var(--bean); color: var(--bean-ink); }
+  .btn-primary { background: var(--coral); color: var(--coral-ink); }
+  .btn-teal { background: var(--teal); color: var(--teal-ink); }
   .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
-  .btn-ghost:hover { border-color: var(--leek); }
+  .btn-ghost:hover { border-color: var(--coral); }
   .btn[disabled] { opacity: .55; cursor: default; }
   .btn-wide { width: 100%; padding: 15px 20px; font-size: 1.05rem; }
 
   /* Steps */
-  .steps { background: var(--surface); border-radius: 22px; box-shadow: var(--shadow); padding: 8px 20px; }
+  .steps { background: var(--surface); border-radius: 14px; box-shadow: var(--shadow); padding: 8px 20px; }
   .step { display: grid; grid-template-columns: 34px 1fr; gap: 4px 12px; padding-block: 16px; border-bottom: 1px solid var(--line); }
   .step:last-of-type { border-bottom: 0; }
   .step-num {
-    width: 30px; height: 30px; border-radius: 50%; background: var(--leek-soft); color: var(--leek);
-    font: 700 .95rem/30px var(--display); text-align: center; margin-top: 1px;
+    width: 30px; height: 30px; border-radius: 50%; background: var(--teal-soft); color: var(--teal-ink);
+    font: 600 .9rem/30px var(--mono); text-align: center; margin-top: 1px;
   }
   .step h2 { font-size: 1.15rem; font-weight: 700; padding-top: 4px; }
   .step-body { grid-column: 2; display: grid; gap: 10px; }
   .hint { color: var(--muted); font-size: .9rem; margin: 0; }
-  .clock { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ink); }
+  .clock { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ink); font-family: var(--mono); }
 
   .chips { display: flex; flex-wrap: wrap; gap: 8px; border: 0; padding: 0; margin: 0; min-width: 0; }
   .chips legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   .chip { position: relative; }
   .chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
   .chip span {
-    display: inline-flex; flex-direction: column; padding: 8px 14px; border-radius: 14px;
+    display: inline-flex; flex-direction: column; padding: 8px 14px; border-radius: 10px;
     border: 1.5px solid var(--line); background: var(--surface-2); cursor: pointer; font-weight: 600; font-size: .95rem;
-    transition: background .12s ease, border-color .12s ease;
+    transition: background .1s ease, border-color .1s ease;
   }
   .chip small { font-weight: 500; color: var(--muted); font-size: .8rem; }
-  .chip input:checked + span { background: var(--leek); border-color: var(--leek); color: var(--leek-ink); }
+  .chip input:checked + span { background: var(--coral); border-color: var(--coral); color: var(--coral-ink); }
   .chip input:checked + span small { color: inherit; opacity: .85; }
   .chip input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
   .chip-lg span { padding: 10px 16px; }
 
   /* Results */
   .section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; }
-  .section-head h2 { font-size: 1.6rem; font-weight: 800; }
+  .section-head h2 { font-size: 1.6rem; font-weight: 700; }
   .summary { color: var(--muted); font-size: .92rem; margin: 4px 0 0; }
-  .note { background: var(--bean); color: var(--bean-ink); border-radius: 12px; padding: 10px 14px; font-size: .92rem; margin: 0; }
+  .note { background: var(--teal-soft); color: var(--teal-ink); border-radius: 10px; padding: 10px 14px; font-size: .92rem; font-weight: 600; margin: 0; }
 
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
   .card {
-    background: var(--surface); border-radius: 20px; box-shadow: var(--shadow); padding: 18px;
-    display: flex; flex-direction: column; gap: 12px; border-top: 6px solid var(--leek);
+    background: var(--surface); border-radius: 14px; box-shadow: var(--shadow); padding: 18px;
+    display: flex; flex-direction: column; gap: 12px; border-top: 3px solid var(--coral);
+    transition: transform .15s ease, box-shadow .15s ease;
   }
-  .card.pick-b { border-top-color: var(--bean-ink); }
-  .photo { display: block; margin: -18px -18px 2px; aspect-ratio: 16 / 10; overflow: hidden; background: var(--leek-soft); }
+  .card.pick-b { border-top-color: var(--teal); }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(17,20,26,.06), 0 16px 32px rgba(17,20,26,.12); }
+  .photo { display: block; margin: -18px -18px 2px; aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface-2); }
   .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .card.has-photo { border-top: 0; overflow: hidden; }
-  .card.has-photo .eyebrow { color: var(--leek); }
-  .eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  .card h3 { font-size: 1.3rem; font-weight: 700; }
+  .eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--teal-ink); font-family: var(--mono); }
+  .card h3 { font-size: 1.35rem; font-weight: 600; }
   .meta { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tag { font-size: .8rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--leek-soft); color: var(--leek); font-variant-numeric: tabular-nums; }
-  .tag.warn { background: var(--chorizo-soft); color: var(--chorizo); }
-  .tag.love { background: var(--bean); color: var(--bean-ink); }
+  .tag { font-size: .8rem; font-weight: 600; padding: 3px 10px; border-radius: 6px; background: var(--teal-soft); color: var(--teal-ink); font-variant-numeric: tabular-nums; font-family: var(--mono); }
+  .tag.warn { background: var(--warn-soft); color: var(--warn); }
+  .tag.love { background: var(--coral); color: var(--coral-ink); }
   .ing-label { font-size: .8rem; font-weight: 700; color: var(--muted); margin: 0 0 4px; }
   .ing { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 4px 6px; font-size: .92rem; }
   .ing li::after { content: " ·"; color: var(--muted); }
@@ -158,10 +134,10 @@
   .row-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
   /* Neither panel */
-  .panel { background: var(--surface); border-radius: 22px; box-shadow: var(--shadow); padding: 20px; display: grid; gap: 12px; }
-  .panel h2 { font-size: 1.3rem; font-weight: 800; }
+  .panel { background: var(--surface); border-radius: 16px; box-shadow: var(--shadow); padding: 20px; display: grid; gap: 12px; }
+  .panel h2 { font-size: 1.3rem; font-weight: 700; }
   textarea, input[type="text"], input[type="url"], input[type="number"], select {
-    width: 100%; border: 1.5px solid var(--line); border-radius: 14px; background: var(--surface-2);
+    width: 100%; border: 1.5px solid var(--line); border-radius: 10px; background: var(--surface-2);
     padding: 12px 14px; font-size: 1rem;
   }
   textarea { min-height: 88px; resize: vertical; }
@@ -169,18 +145,18 @@
   .method { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: .95rem; }
 
   /* Add recipe */
-  details.panel > summary { cursor: pointer; font: 800 1.3rem/1.2 var(--display); list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  details.panel > summary { cursor: pointer; font: 700 1.3rem/1.2 var(--display); list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
   details.panel > summary::-webkit-details-marker { display: none; }
-  details.panel > summary::after { content: "+"; font-size: 1.6rem; color: var(--leek); }
+  details.panel > summary::after { content: "+"; font-size: 1.6rem; color: var(--coral-dark); }
   details[open].panel > summary::after { content: "–"; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .form-grid .full { grid-column: 1 / -1; }
   .field { display: grid; gap: 4px; }
   .field label, .field .lbl { font-size: .85rem; font-weight: 700; color: var(--muted); }
   .check { display: flex; align-items: center; gap: 8px; font-weight: 600; }
-  .check input { width: 20px; height: 20px; accent-color: var(--leek); }
+  .check input { width: 20px; height: 20px; accent-color: var(--coral); }
   .saved-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: .95rem; }
-  .saved-list li { display: flex; justify-content: space-between; gap: 10px; padding: 8px 12px; border-radius: 12px; background: var(--surface-2); }
+  .saved-list li { display: flex; justify-content: space-between; gap: 10px; padding: 8px 12px; border-radius: 10px; background: var(--surface-2); }
   .saved-list li span:last-child { color: var(--muted); font-size: .85rem; white-space: nowrap; }
 
   footer { color: var(--muted); font-size: .88rem; display: grid; gap: 6px; }
@@ -188,7 +164,7 @@
 
   .toast {
     position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
-    background: var(--ink); color: var(--bg); padding: 12px 18px; border-radius: 14px; font-weight: 600;
+    background: var(--ink); color: var(--bg); padding: 12px 18px; border-radius: 10px; font-weight: 600;
     max-width: calc(100% - 32px); box-shadow: var(--shadow); z-index: 10;
   }
 
@@ -209,7 +185,7 @@
       <h1>Choose My <span>Meal</span></h1>
       <p>Chessy &amp; Duffy's dinner decider</p>
     </div>
-    <button class="btn btn-bean" id="justPick" type="button">🎲 Just pick for us</button>
+    <button class="btn btn-teal" id="justPick" type="button">🎲 Just pick for us</button>
   </header>
 
   <form class="steps" id="steps">
@@ -271,12 +247,17 @@
     <p class="hint">Saw something good on a reel? Save it here and it joins the suggestions. Everyone with the link sees it.</p>
     <form id="addForm" class="form-grid">
       <div class="field full">
+        <label for="addUrl">Link (reel or recipe page)</label>
+        <div class="row-actions" style="flex-wrap:nowrap">
+          <input type="url" id="addUrl" placeholder="https://www.instagram.com/reel/…" style="flex:1">
+          <button class="btn btn-ghost" type="button" id="addFetch">✨ Try to fill this in</button>
+        </div>
+        <p class="hint" id="addFetchHint">If Claude recognises the recipe from this link it'll fill in what it can below -- always check before saving, especially for a reel or anything less well-known.</p>
+      </div>
+      <p class="status full" id="addFetchStatus"></p>
+      <div class="field full">
         <label for="addName">Recipe name</label>
         <input type="text" id="addName" required maxlength="120" placeholder="Crispy chorizo butter beans">
-      </div>
-      <div class="field full">
-        <label for="addUrl">Link (reel or recipe page)</label>
-        <input type="url" id="addUrl" placeholder="https://www.instagram.com/reel/…">
       </div>
       <div class="field">
         <label for="addProtein">Protein</label>
@@ -325,6 +306,7 @@
 <div class="toast" id="toast" hidden></div>
 
 <script src="recipes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
 (function () {
   const R = window.RECIPES;
@@ -339,11 +321,11 @@
   const VIBES = [
     { v: "weekend", label: "Weekend night", sub: "new & exciting" },
     { v: "chill", label: "Chill", sub: "an old favourite" },
-    { v: "easy", label: "New but easy", sub: "pasta, rice, gnocchi, one-pots" }
+    { v: "easy", label: "New but easy", sub: "something simple we haven't done before" }
   ];
   const HOUSES = [
-    { v: "chessy", label: "Chessy's house", sub: "Hartswood Road, well stocked" },
-    { v: "duffy", label: "Duffy's house", sub: "stock cubes & spices only" }
+    { v: "chessy", label: "Chessy's house" },
+    { v: "duffy", label: "Duffy's house" }
   ];
   const PROTEINS = [
     { v: "chicken", label: "🐔 Chicken" }, { v: "lamb", label: "🐑 Lamb" },
@@ -583,16 +565,31 @@
         "; protein = " + PROTEIN_WORD[state.protein] + ".",
       "",
       "Rules: never beef. Chessy is dairy-free and sesame-free, but they adapt recipes themselves, so a recipe with dairy or sesame is fine as long as you flag it.",
-      "They love one-pot wonders, leeks, butter beans and chorizo, and recipes in the style of Anna's Family Kitchen, the Flavour Fellas, Mob, RecipeTin Eats and Instagram reels. They also want fresh ideas beyond their usual ingredients.",
+      "They love one-pot wonders, leeks, butter beans and chorizo, and recipes in the style of Anna's Family Kitchen, Flavour Fellas, Susie Flory, The Greedy Model, Mob, RecipeTin Eats and Instagram reels. They also want fresh ideas beyond their usual ingredients. Those accounts are a guide to their taste, not the only places a good recipe can come from.",
       "Dishes they already cook often (don't suggest these): " + favs + ".",
       "",
       "Recipes with verified links (use one of these if it fits what they asked for):",
       catalogue + (extra ? "\n" + extra : ""),
       "",
-      "Suggest ONE recipe that best fits what they asked. They always need a link to the source. If a recipe from the verified list fits, use its exact URL. Otherwise pick a real, published recipe from a well-known site (e.g. BBC Good Food, RecipeTin Eats, Mob, Jamie Oliver, Anna's Family Kitchen, Olive, Waitrose, NYT Cooking, Delicious, The Happy Foodie) and give its URL only if you are confident it exists; otherwise leave url empty.",
+      "Suggest ONE recipe that best fits what they asked. They always need a link to the source. If a recipe from the verified list fits, use its exact URL. Otherwise pick a real, published recipe from a reputable site or creator -- e.g. BBC Good Food, RecipeTin Eats, Mob, Jamie Oliver, Anna's Family Kitchen, Justine Pattison, Beat The Budget, The Happy Foodie, Susie Flory, The Greedy Model, Olive, Waitrose, NYT Cooking, Delicious -- or anywhere else well-known and trustworthy; that list is a guide to their taste, not the only places to look. Give a URL only if you are confident it exists; otherwise leave url empty.",
       "",
       "Reply with only a JSON object, no other text, in this shape:",
       '{"name": "Recipe name", "source": "Site or author", "url": "https://...", "protein": "chicken|lamb|pork|chorizo|fish|seafood|veg", "mins": 40, "onePot": true, "why": "One or two sentences on why it fits what they asked", "ingredients": ["main things to buy"], "method": ["4 to 6 short steps"], "dairy": false, "sesame": false, "swaps": "dairy/sesame swaps if needed, else empty"}'
+    ].join("\n");
+  }
+  // You can't actually fetch this link from in here -- only ask whether
+  // Claude already knows the recipe from training. Unknown link -> say so,
+  // never invent plausible-sounding details for a recipe it hasn't seen.
+  function buildAddFillPrompt(url) {
+    return [
+      "Someone is filling in a recipe-tracking form from this link: " + url,
+      "You cannot browse the web or access this link. Answer only from what you already know from training.",
+      "",
+      "If you recognise this exact recipe (a well-known published recipe you've seen before), fill in the fields below as accurately as you recall, and set \"recognized\": true.",
+      "If you don't recognise this specific recipe/link, or you're not confident, set \"recognized\": false and leave every other field null -- never invent plausible-sounding ingredients, time or protein for a recipe you don't actually know. A reel or an obscure link should usually come back unrecognised.",
+      "",
+      "Reply with only a JSON object, no other text, in this shape:",
+      '{"recognized": true, "name": "Recipe name"|null, "source": "Site or author"|null, "protein": "chicken|lamb|pork|chorizo|fish|seafood|veg"|null, "mins": 40|null, "onePot": true|false|null, "ingredients": ["main things to buy"]|null}'
     ].join("\n");
   }
   function showAI(r) {
@@ -629,7 +626,7 @@
       default: return "Something went wrong reaching Claude. Try again.";
     }
   }
-  function showCopyFallback() { $("copyPrompt").hidden = false; }
+  function showCopyFallback() { $("copyPrompt").hidden = false; $("addFetch").hidden = true; $("addFetchHint").hidden = true; }
   $("copyPrompt").addEventListener("click", async () => {
     const text = buildPrompt($("wish").value.trim() || "anything new and tasty");
     try { await navigator.clipboard.writeText(text); toast("Copied. Paste it into Claude."); }
@@ -659,16 +656,37 @@
   });
   $("stopFind").addEventListener("click", () => findCtl && findCtl.abort());
 
-  // ---------- Added recipes (shared db) ----------
-  let db = null;
-  function dbErrorText(e) {
-    const code = e && e.code;
-    if (code === "permission_denied" || code === "not_granted") return "You don't have permission to add recipes. Ask Chessy to share the page with you as a Contributor.";
-    return "Couldn't save just now. Try again.";
-  }
+  // ---------- Added recipes (shared via Supabase, works with no claude.ai login) ----------
+  // Paste your own project's values here -- see README.md "Shared add-recipe (Supabase)".
+  // The anon key is meant to be public; it's only as permissive as the table's row-level
+  // security policies, set up per the README's SQL.
+  const SUPABASE_URL = "https://YOUR-PROJECT.supabase.co";
+  const SUPABASE_ANON_KEY = "YOUR-ANON-PUBLIC-KEY";
+  const supa = (SUPABASE_URL.includes("YOUR-PROJECT") || !window.supabase)
+    ? null
+    : window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  function dbErrorText() { return "Couldn't save just now. Try again."; }
   async function saveRecipe(r) {
     if (/\bbeef\b/i.test(r.name)) throw { code: "beef" };
-    await db.collection("recipes").add({ ...r, addedAt: Date.now() });
+    const { error } = await supa.from("recipes").insert({
+      name: r.name, url: r.url || null, protein: r.protein, mins: r.mins,
+      one_pot: !!r.onePot, kind: r.kind, ing: r.ing || [], loves: !!r.loves, source: r.source || null
+    });
+    if (error) throw { code: "db_error" };
+  }
+  function mapRows(rows) {
+    return (rows || []).filter((r) => r && typeof r.name === "string" && !/\bbeef\b/i.test(r.name))
+      .map((r) => ({ name: r.name, url: typeof r.url === "string" && /^https?:\/\//.test(r.url) ? r.url : "",
+        protein: String(r.protein || "chicken"), mins: Number(r.mins) || 30, onePot: !!r.one_pot,
+        kind: r.kind === "fav" ? "fav" : "new", ing: Array.isArray(r.ing) ? r.ing.map(String) : [],
+        loves: !!r.loves, source: typeof r.source === "string" ? r.source : "", effort: 1 }));
+  }
+  async function loadAdded() {
+    const { data, error } = await supa.from("recipes").select("*").order("added_at", { ascending: false }).limit(200);
+    if (error) return;
+    added = mapRows(data);
+    renderSaved();
   }
   function renderSaved() {
     const list = $("savedList");
@@ -681,12 +699,38 @@
       ))
     );
   }
+  $("addFetch").addEventListener("click", async () => {
+    const url = $("addUrl").value.trim();
+    if (!/^https?:\/\//.test(url)) { $("addFetchStatus").textContent = "Paste a link first."; $("addUrl").focus(); return; }
+    if (!sample) { $("addFetchStatus").textContent = "Claude isn't available here, so this only works on the published page -- fill it in yourself below."; return; }
+    $("addFetch").disabled = true; $("addFetchStatus").textContent = "Thinking…";
+    try {
+      const r = await sample.json(buildAddFillPrompt(url), { cache: false });
+      if (!r || typeof r !== "object") throw { code: "invalid_json" };
+      if (!r.recognized) {
+        $("addFetchStatus").textContent = "Didn't recognise that link -- fill in the details below yourself.";
+      } else {
+        if (r.name) $("addName").value = String(r.name);
+        if (r.protein && PROTEIN_WORD[r.protein]) $("addProtein").value = r.protein;
+        if (r.mins) $("addMins").value = Math.max(5, Number(r.mins) || 30);
+        if (typeof r.onePot === "boolean") $("addOnePot").checked = r.onePot;
+        if (Array.isArray(r.ingredients) && r.ingredients.length) $("addIng").value = r.ingredients.map(String).join(", ");
+        $("addFetchStatus").textContent = "Filled in from what Claude already knew about this one -- check it's right before saving.";
+      }
+    } catch (e) {
+      $("addFetchStatus").textContent = (e && e.code === "rate_limited")
+        ? "Claude's busy right now -- try again in a minute, or just fill it in yourself."
+        : "Couldn't get an answer -- fill in the details below yourself.";
+    } finally {
+      $("addFetch").disabled = false;
+    }
+  });
   $("addForm").addEventListener("submit", async (ev) => {
     ev.preventDefault();
     const name = $("addName").value.trim();
     if (!name) return;
     if (/\bbeef\b/i.test(name)) { $("addStatus").textContent = "No beef allowed! Try a different protein."; return; }
-    if (!db) { $("addStatus").textContent = "Saving recipes only works on the published page."; return; }
+    if (!supa) { $("addStatus").textContent = "Saving recipes needs the Supabase keys set in index.html -- see the README."; return; }
     const url = $("addUrl").value.trim();
     const rec = {
       name, url: /^https?:\/\//.test(url) ? url : "", protein: $("addProtein").value,
@@ -709,22 +753,23 @@
   // ---------- Boot ----------
   renderControls(); tickClock(); setInterval(tickClock, 30000); suggest();
 
+  // AI suggestions: only present inside claude.ai; falls back to copy/paste
+  // everywhere else (a plain static host included), which is deliberate --
+  // no billed API key behind this page.
   if (window.claude && window.claude.use) {
     window.claude.use("sample").then((s) => { sample = s; if (!s) showCopyFallback(); });
-    window.claude.use("db").then((d) => {
-      db = d;
-      if (!d) { $("addStatus").textContent = "Saving recipes only works on the published page."; return; }
-      d.collection("recipes").orderBy("addedAt", "desc").onSnapshot((snap) => {
-        added = snap.docs.map((doc) => doc.data()).filter((r) => r && typeof r.name === "string" && !/\bbeef\b/i.test(r.name))
-          .map((r) => ({ name: r.name, url: typeof r.url === "string" && /^https?:\/\//.test(r.url) ? r.url : "", protein: String(r.protein || "chicken"),
-            mins: Number(r.mins) || 30, onePot: !!r.onePot, kind: r.kind === "fav" ? "fav" : "new", ing: Array.isArray(r.ing) ? r.ing.map(String) : [],
-            loves: !!r.loves, source: typeof r.source === "string" ? r.source : "", effort: 1 }));
-        renderSaved();
-      }, () => {});
-    });
   } else {
     showCopyFallback();
-    $("addStatus").textContent = "Saving recipes only works on the published page.";
+  }
+
+  // Shared add-recipe: works anywhere once index.html has real Supabase keys.
+  if (supa) {
+    loadAdded();
+    supa.channel("public:recipes")
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "recipes" }, loadAdded)
+      .subscribe();
+  } else {
+    $("addStatus").textContent = "Saving recipes needs the Supabase keys set in index.html -- see the README.";
   }
 })();
 </script>
