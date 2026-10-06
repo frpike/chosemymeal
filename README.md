@@ -15,9 +15,9 @@ Lives in two places from the same source files:
 
 You get two suggestions, picked to be different from each other. **Shuffle** re-rolls them, and **🎲 Just pick for us** skips the questions. **We'll cook this!** keeps that dish out of the next few suggestions (remembered on that phone).
 
-**Neither of those?** Type what you want (e.g. "something spicy with leeks, no oven") and Claude suggests another recipe with a source link. Claude can't browse the web, so it prefers the recipes in our list, which have checked links. Every idea also has a *Search for this recipe* link in case a link is wrong. This needs the published claude.ai page. Anywhere else, use *Copy request for Claude* and paste it into Claude.
+**Neither of those?** Type what you want (e.g. "something spicy with leeks, no oven") and Claude suggests another recipe with a source link. Claude can't browse the web, so it prefers the recipes in our list, which have checked links. Every idea also has a *Search for this recipe* link in case a link is wrong. Works on both the claude.ai page (asks the viewer's own Claude, free) and the public link (asks a small Edge Function instead, see below) — if neither is available it falls back to *Copy request for Claude*, paste it in yourself.
 
-**➕ Add a recipe** saves a reel or recipe to the shared list and it goes into the suggestions straight away, live on both the public link and the claude.ai page — no sharing/permissions to set up, that's handled by the Supabase setup below. Paste the link and hit **✨ Try to fill this in** first — Claude can't actually open the link (same limitation as "Neither of those?", and only works on the claude.ai page, where Claude is actually present), but if it already knows the recipe from training it'll fill in what it can. Always check the result before saving; a reel or anything less well-known will usually come back unrecognised, and you fill it in yourself same as before.
+**➕ Add a recipe** saves a reel or recipe to the shared list and it goes into the suggestions straight away, live on both the public link and the claude.ai page — no sharing/permissions to set up, that's handled by the Supabase setup below. Paste the link and hit **✨ Try to fill this in** first — Claude can't actually open the link either way, but if it already knows the recipe from training it'll fill in what it can, on either surface. Always check the result before saving; a reel or anything less well-known will usually come back unrecognised, and you fill it in yourself same as before.
 
 ⚠️ tags mean the recipe *as written* has dairy or sesame, so swap before cooking.
 
@@ -69,6 +69,18 @@ The "Add a recipe" list is stored in a free Supabase project, not claude.ai's da
 
 Until those two placeholders are replaced, "Add a recipe" just shows a message saying so — everything else in the app works regardless.
 
+## AI on the public link (Edge Function)
+
+"Neither of those?" and the recipe-link autofill need to ask a real Claude somewhere. On the claude.ai page that's free — it asks the viewer's own Claude. The public link has no such thing, so it calls a small Supabase Edge Function instead, which holds a real Anthropic API key server-side (the page itself never sees it). One-time setup, same Supabase project as above:
+
+1. In the Supabase dashboard: **Edge Functions → New Function**, name it `ai-suggest`, and paste in the contents of `supabase/functions/ai-suggest/index.ts`. Deploy.
+2. **Edge Functions → Secrets**, add `ANTHROPIC_API_KEY` — reuse the same key `add_recipe_gui.py` already uses locally (Settings → API keys at console.anthropic.com). This does mean the public link's usage bills to that same key.
+3. That's it — `index.html` already calls `${SUPABASE_URL}/functions/v1/ai-suggest`, no further changes needed.
+
+Worth knowing: this function is deliberately simple — a prompt-length cap and a small `max_tokens`, nothing more. It's fine for a two-person app on a link that isn't published anywhere, but if the link ever spreads further than intended, anyone who has it could trigger (billed) AI calls. Add real rate limiting before that becomes a real risk, or swap in a separate, spend-capped API key instead of the shared one.
+
+Until the function is deployed and the secret is set, both AI features fall back to the copy/paste-into-Claude flow — nothing breaks, it's just not one-tap.
+
 ## Publishing
 
 Two separate deploys, both from this folder:
@@ -95,4 +107,4 @@ This needs internet access to the recipe sites. It only fetches photos that are 
 
 ## Running it locally
 
-Open `index.html` in a browser. Everything works, including saving recipes once the Supabase keys are set — only asking Claude ("Neither of those?" and the recipe-link autofill) needs the published claude.ai page.
+Open `index.html` in a browser. Everything works once the Supabase keys are set, including asking Claude (via the Edge Function) and saving recipes — nothing here actually requires the published claude.ai page any more.

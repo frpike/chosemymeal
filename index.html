@@ -549,6 +549,32 @@
 
   // ---------- "Neither!" — ask Claude ----------
   let sample = null, findCtl = null;
+  // On claude.ai, sample.json() asks the viewer's own Claude, free. Off
+  // claude.ai (the public link), there's no such thing, so this falls back
+  // to a small Supabase Edge Function that holds a real Anthropic key
+  // server-side -- see README.md "AI on the public link". Same JSON-in,
+  // JSON-out contract either way, so nothing else has to know which path ran.
+  async function aiJSON(promptText, opts) {
+    opts = opts || {};
+    if (sample) return sample.json(promptText, opts);
+    let resp;
+    try {
+      resp = await fetch(SUPABASE_URL + "/functions/v1/ai-suggest", {
+        method: "POST", signal: opts.signal,
+        headers: { "content-type": "application/json", "Authorization": "Bearer " + SUPABASE_ANON_KEY },
+        body: JSON.stringify({ prompt: promptText })
+      });
+    } catch (e) {
+      if (e && e.name === "AbortError") throw { code: "cancelled" };
+      throw { code: "edge_unavailable" };
+    }
+    if (resp.status === 429) throw { code: "rate_limited" };
+    if (!resp.ok) throw { code: "edge_unavailable" };
+    const body = await resp.json().catch(() => null);
+    if (!body || typeof body.text !== "string") throw { code: "invalid_json" };
+    try { return JSON.parse(body.text); }
+    catch { throw { code: "invalid_json" }; }
+  }
   function buildPrompt(wish) {
     const catalogue = R.newIdeas.map((r) => "- " + r.name + " | " + r.source + " | " + r.url).join("\n");
     const favs = R.favourites.map((r) => r.name).join("; ");
@@ -623,6 +649,7 @@
       case "session_expired": return "Please sign in to Claude again, then try once more.";
       case "invalid_json": return "Claude's answer came back jumbled. Tap Find another idea to try again.";
       case "refused": return "Claude couldn't help with that one. Try describing it differently.";
+      case "edge_unavailable": return "Couldn't reach Claude just now. Try again in a minute.";
       default: return "Something went wrong reaching Claude. Try again.";
     }
   }
@@ -635,12 +662,11 @@
   $("findAnother").addEventListener("click", async () => {
     const wish = $("wish").value.trim();
     if (!wish) { $("findStatus").textContent = "Type what you're in the mood for first, e.g. \"something spicy with leeks\"."; $("wish").focus(); return; }
-    if (!sample) { $("findStatus").textContent = "Claude isn't available here. Copy the request and paste it into Claude instead."; showCopyFallback(); return; }
     findCtl = new AbortController();
     $("findAnother").disabled = true; $("stopFind").hidden = false;
     $("findStatus").textContent = "Thinking… this can take up to a minute.";
     try {
-      const r = await sample.json(buildPrompt(wish), { signal: findCtl.signal, cache: false });
+      const r = await aiJSON(buildPrompt(wish), { signal: findCtl.signal, cache: false });
       if (!r || typeof r !== "object" || !r.name) throw { code: "invalid_json" };
       showAI(r);
       $("findStatus").textContent = r.url ? "Here's one. Check the link opens the right recipe before you shop." : "Here's one. We couldn't confirm a link, so use Search for this recipe.";
@@ -648,7 +674,7 @@
       if (e && e.code === "cancelled") $("findStatus").textContent = "Stopped.";
       else {
         $("findStatus").textContent = sampleErrorText(e && e.code);
-        if (e && ["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"].includes(e.code)) { sample = null; showCopyFallback(); }
+        if (e && ["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed", "edge_unavailable"].includes(e.code)) { sample = null; showCopyFallback(); }
       }
     } finally {
       $("findAnother").disabled = false; $("stopFind").hidden = true;
@@ -700,10 +726,9 @@
   $("addFetch").addEventListener("click", async () => {
     const url = $("addUrl").value.trim();
     if (!/^https?:\/\//.test(url)) { $("addFetchStatus").textContent = "Paste a link first."; $("addUrl").focus(); return; }
-    if (!sample) { $("addFetchStatus").textContent = "Claude isn't available here, so this only works on the published page -- fill it in yourself below."; return; }
     $("addFetch").disabled = true; $("addFetchStatus").textContent = "Thinking…";
     try {
-      const r = await sample.json(buildAddFillPrompt(url), { cache: false });
+      const r = await aiJSON(buildAddFillPrompt(url), { cache: false });
       if (!r || typeof r !== "object") throw { code: "invalid_json" };
       if (!r.recognized) {
         $("addFetchStatus").textContent = "Didn't recognise that link -- fill in the details below yourself.";
@@ -751,13 +776,13 @@
   // ---------- Boot ----------
   renderControls(); tickClock(); setInterval(tickClock, 30000); suggest();
 
-  // AI suggestions: only present inside claude.ai; falls back to copy/paste
-  // everywhere else (a plain static host included), which is deliberate --
-  // no billed API key behind this page.
+  // AI suggestions: on claude.ai, sample.json() asks the viewer's own
+  // Claude, free. Everywhere else, aiJSON() falls back to the Edge
+  // Function on first use -- so don't preemptively hide the AI buttons
+  // just because window.claude is absent; only fall back to copy/paste
+  // once an actual attempt confirms neither path works.
   if (window.claude && window.claude.use) {
-    window.claude.use("sample").then((s) => { sample = s; if (!s) showCopyFallback(); });
-  } else {
-    showCopyFallback();
+    window.claude.use("sample").then((s) => { sample = s; });
   }
 
   // Shared add-recipe: works anywhere once index.html has real Supabase keys.
