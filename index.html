@@ -4,6 +4,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#F2F4F7">
 <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAFHElEQVR4nO3dQY7cNhCFYU6Qa8XbLHygADlAgBwp6xxsvKAhCO55M6REsl5R/7cOYKnwd1HdiK239+/fCvCR36IvAL6IAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQPo9+gLCvP31d/t//P7vP/OuxNbbQ/4idVcKLZ6Qy85xDA9C2TWUDeNY1sSrzSrZJ47AJl7tUckOcVhlcZY9kdxx2GZxljeRrHGkyOIsYyL54kiXxVmuRJL9Qpq6jJLt+tNsjlxj/VKKFZJjc2xWRklyR+6bY94Q3//4s+My/v9v1mUYrxDrOMaW0VXD58a2YtuHbxyjyhjYxKtRlXj24RjHkCymNvFqSCVuidjFcb+MxVmc3U/Eqg+vOG6WEZjF2c1EfPowiuNOGSZZnN1JxKQPlzgul2GYxdnlRBz6sPgRbNcyyo0rdPiVLH5zXJuCfxa/uLZCYveHxebola6MkvOag+O4sDYyTrm6cOWxh0vksdJ753mz+EXvERN1uIRtjseWUfrvJWp/5Hjm2KmMKsUdxcTR91cRM8zxgr7/ZyBieQTEQRkH8z6sj5W9y6ic73F1HA4//OW1eHpL4+BA+ZDt4WJ6rDynjMrzftfF0Z6856Rma7/rZcvDdHPAwaI4WBst3JaH1+Z4chmV1QRWxMHX1xkWTNVoc1h9aAL5zGF6HKyNeWbP1mVz+HxcHJhMwyUOGJobR+PeM/mgWGmcydSThc0BKT4O1oYSPpmJcfA9ZY15c47fHLAVHEf45jQXOx82B6RZcfDAsdKkaUduDs6UFoFT4liBRByQiAMScUCaEkfLwzNPo+1aZjXjCwubAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQekKXG0/Cv/897xvJ+WWc14swKbAxJxQCIOSMQBKTIOnklbBE5pVhwO78x9jknT5liBFP3qUE6WT8XOh80BaWIcPHasMW/O8ZuDk0UJn0x8HLA1N47GjRf+ETHUOJOpZzebA5JLHCyPM5NpTI+D7yzzzJ6ty+YoNh+XcD5zWBEHy2OGBVM12hzF6UMTxWoCi+Joz9xqOou13/uaZey1OWBlXRwsj8+5rY1iuzme1ofn/S6Noyt5z3nN0HWnK7/6rd4cfK29Y/H0TI+V6gnLw/keA+LgcDnYHihVzOagj2JfRjE/Vg779ZHijsLi6P0opJhmo957iXqKf3v//i3kD/75x/f/W/+pX7dwIfHA73fRrw7tv/O8KyRXGSU8jmsy9pHymmOPlZ8XcfVFMimOmMtZhP9gaLE5Lk/B/+OYt4xisjmqOy+iMlwhd8J1KKNYxVFuv6jMJJGb+8ykjOIWRxnxIrvARO4fcz5lFMM4yqAXHS5OZMjTj1UZxTOOatS7MKdWMuqJ2C2LyjeOMvpdqQMrGfstybOMYh5HmfMu3aqrlXnfmW3LKP5xVPMSCeScRWXxI9iX/OfYK8Ud5dgchw1WSIosqhyb45Bosh/Kdf3JNsch3QrJlUWVNY4qRSIZs6hyx1HZJpI3i2qHOCqrRLJnUe0TxyGwkj2aOGwYx2FZJZs1cdg5jrPhoewaxNlT4njVlcsTUnj13DjwpWS/kGIl4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oD0AygJypLE6viCAAAAAElFTkSuQmCC">
+<meta name="app-version" content="2026-10-06T22:13:26.877Z">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
@@ -309,6 +310,27 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
 (function () {
+  // Self-update check. A home-screen web app has no reload button and
+  // iOS won't re-fetch it on its own, so a stale copy can sit there
+  // indefinitely. This re-fetches index.html (bypassing cache) whenever
+  // the app is opened or comes back to the foreground, and reloads if the
+  // app-version meta tag has moved on. tools/stamp-version.js bumps that
+  // tag before each deploy -- see README.md.
+  (function selfUpdateCheck() {
+    const current = document.querySelector('meta[name="app-version"]').content;
+    async function check() {
+      try {
+        const res = await fetch(location.href, { cache: "no-store" });
+        const html = await res.text();
+        const m = html.match(/name="app-version" content="([^"]*)"/);
+        if (m && m[1] && m[1] !== current) location.reload();
+      } catch { /* offline or blocked -- just keep the current copy running */ }
+    }
+    document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") check(); });
+    window.addEventListener("pageshow", check);
+    check();
+  })();
+
   const R = window.RECIPES;
   const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];

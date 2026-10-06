@@ -85,7 +85,7 @@ Until the function is deployed and the secret is set, both AI features fall back
 
 Two separate deploys, both from this folder:
 
-**The public link (GitHub Pages, no login)** — push `index.html`, `recipes.js`, and `img/` as-is to the `frpike/chosemymeal` repo (no bundling needed, GitHub Pages serves multiple files directly) and it redeploys automatically.
+**The public link (GitHub Pages, no login)** — run `node tools/stamp-version.js` first (so a home-screen copy notices the update and reloads itself — see "Staying up to date" below), then push `index.html`, `recipes.js`, and `img/` as-is to the `frpike/chosemymeal` repo (no bundling needed, GitHub Pages serves multiple files directly) and it redeploys automatically.
 
 **The claude.ai page** — Claude's published pages are one self-contained file, so `index.html`'s `<script src="recipes.js">` needs inlining first:
 
@@ -94,6 +94,10 @@ node tools/build-publish.js > /tmp/chosemymeal-publish.html
 ```
 
 then publish `/tmp/chosemymeal-publish.html` (with the `sample` capability declared — `db` isn't used any more, Supabase replaced it) — never `index.html` on its own, or the live page loads with no recipes.
+
+## Staying up to date on a home screen
+
+A page added to an iPhone's home screen has no reload button and iOS won't re-fetch it on its own — without something explicit, a stale copy could sit there indefinitely after a deploy. `index.html` checks for itself: every time it's opened or comes back to the foreground, it re-fetches itself (bypassing cache) and reloads if the `app-version` meta tag has moved on. That tag only changes when `tools/stamp-version.js` runs, so **always run it before pushing to `frpike/chosemymeal`** — skip it and existing home-screen copies won't notice the update (new installs would still get the latest code, since they load it fresh). Not needed for the claude.ai page; that's always fetched fresh by claude.ai itself.
 
 ## Recipe photos
 
